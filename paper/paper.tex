@@ -1,4 +1,3 @@
-
 %% bare_jrnl.tex
 %% V1.3
 %% 2007/01/11
@@ -70,7 +69,7 @@
 % \documentclass[journal]{../sty/IEEEtran}
 
 
-
+\input{settings}
 
 
 % Some very useful LaTeX packages include:
@@ -389,9 +388,6 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
-% Custom settings
-\input{settings}
-
 \begin{document}
 %
 % paper title
@@ -463,22 +459,7 @@ Michael~Wurster}
 \maketitle
 
 
-\begin{abstract}
-%\boldmath
-The abstract goes here.
-\end{abstract}
-% IEEEtran.cls defaults to using nonbold math in the Abstract.
-% This preserves the distinction between vectors and scalars. However,
-% if the journal you are submitting to favors bold math in the abstract,
-% then you can use LaTeX's standard command \boldmath at the very start
-% of the abstract to achieve this. Many IEEE journals frown on math
-% in the abstract anyway.
-
-% Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-Android, Research, SWA, MVP, MVC, Kraut, R\"uben.
-\end{IEEEkeywords}
-
+\input{Content/abstract}
 
 
 
@@ -494,131 +475,15 @@ Android, Research, SWA, MVP, MVC, Kraut, R\"uben.
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
-% The very first letter is a 2 line initial drop letter followed
-% by the rest of the first word in caps.
-% 
-% form to use if the first word consists of a single letter:
-% \IEEEPARstart{A}{demo} file is ....
-% 
-% form to use if you need the single drop letter followed by
-% normal text (unknown if ever used by IEEE):
-% \IEEEPARstart{A}{}demo file is ....
-% 
-% Some journals put the first two words in caps:
-% \IEEEPARstart{T}{his demo} file is ....
-% 
-% Here we have the typical use of a "T" for an initial drop letter
-% and "HIS" in caps to complete the first word.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-
-\input{chapters/introduction}
-
-\rule{0.3\textwidth}{0.4pt}
-
-Vielleicht k\"onnen wir ja ein sch\"ones Paper damit erstellen und uns so schon einen Pluspunkt bei der Abgabe abholen. Ich bin mir sicher, dass der Prof. Zimmermann auf sch\"ones Aussehen steht.
-
-\hfill Euer Dennis
-
-\section{Erstes richtiges Kapitel: MVP vs. MVC}
-
-\subsection{Was tun wir hier eigentlich?}
-We want to express the advantages of MVP by comparing it to MVC and other programming styles for Android apps.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-\subsubsection{Kraut und R\"uben}
-Macht jeder, ist scheisse. Kann man nicht gut hei\ss en.
-\subsubsection{MVC}
-Schon besser, aber natürlich ist MVP viel cooler, das wollen wir hier schlie\ss lich zeigen.
-\subsubsection{MVP}
-Viiiiel besser!
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
-
-% Note that IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
 
 
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command, the
-% \label for the overall figure must come after \caption.
-% \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
+\input{Content/01introduction}
 
 
-% An example of a floating table. Note that, for IEEE style tables, the 
-% \caption command should come BEFORE the table. Table text will default to
-% \footnotesize as IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
+\input{Content/02research}
 
 
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals use top floats exclusively.
-% Note that, LaTeX2e, unlike IEEE journals, places footnotes above bottom
-% floats. This can be corrected via the \fnbelowfloat command of the
-% stfloats package.
-
-
-
-\section{Conclusion}
-The conclusion goes here.
+\input{Content/03conclusion}
 
 
 
@@ -639,21 +504,7 @@ The conclusion goes here.
 %
 
 
-\appendices
-\section{Proof of the First Zonklar Equation}
-Appendix one text goes here.
-
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
-
-
-% use section* for acknowledgement
-\section*{Acknowledgment}
-
-
-The authors would like to thank...
+\input{Content/appendix}
 
 
 % Can use something like this to put references on a page
@@ -681,19 +532,12 @@ The authors would like to thank...
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
 %\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv, paper}
-%\bibliography{IEEEabrv,paper}
+%\bibliography{IEEEabrv,../bib/paper}
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
+\input{Content/sources}
 
 % biography section
 % 
