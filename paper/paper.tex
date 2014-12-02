@@ -63,7 +63,7 @@
 % should be used if it is desired that the figures are to be displayed in
 % draft mode.
 %
-\documentclass[journal]{IEEEtemplate/IEEEtran}
+\documentclass[journal]{IEEEtran}
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
@@ -389,6 +389,9 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
+% Custom settings
+\input{settings}
+
 \begin{document}
 %
 % paper title
@@ -405,7 +408,8 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Dennis Geisse, Iven John, Daniel Joos, Sebastian Kotstein, Michael Wurster}
+\author{Dennis~Geisse, Iven~John, Daniel~Joos, Sebastian~Kotstein, 
+Michael~Wurster}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -490,9 +494,6 @@ Android, Research, SWA, MVP, MVC, Kraut, R\"uben.
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
-
-
-\section{Introduction}
 % The very first letter is a 2 line initial drop letter followed
 % by the rest of the first word in caps.
 % 
@@ -508,10 +509,13 @@ Android, Research, SWA, MVP, MVC, Kraut, R\"uben.
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{D}{ieses} Template gilt f\"ur IEEE journal papers, die in \LaTeX\ mit der Klasse
-IEEEtran.cls geschrieben werden.
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
+
+\input{chapters/introduction}
+
+\rule{0.3\textwidth}{0.4pt}
+
 Vielleicht k\"onnen wir ja ein sch\"ones Paper damit erstellen und uns so schon einen Pluspunkt bei der Abgabe abholen. Ich bin mir sicher, dass der Prof. Zimmermann auf sch\"ones Aussehen steht.
 
 \hfill Euer Dennis
@@ -677,7 +681,8 @@ The authors would like to thank...
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
 %\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
+%\bibliography{IEEEabrv, paper}
+%\bibliography{IEEEabrv,paper}
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
