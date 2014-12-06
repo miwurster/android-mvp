@@ -1,5 +1,9 @@
 Modern Android application development: An approach using MVP
 ===========
+
+Paper
+-----
+
 Comments regarding the structure of the paper:
 
 - Main document is paper.tex
@@ -9,3 +13,13 @@ Comments regarding the structure of the paper:
   * 01 to 03 contain the respective chapters
   * other files are self-explaining
   * File 02research.tex contains some advice how to create figures and tables with the template
+
+MVP Structure
+-------------
+
+COMMING SOON
+
+Weather App
+-----------
+
+COMMING SOON
