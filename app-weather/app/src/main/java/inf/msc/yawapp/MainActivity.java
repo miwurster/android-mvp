@@ -42,13 +42,13 @@ public class MainActivity extends Activity {
     }
 
     public void getWeather(View view) {
-        EditText editText = (EditText) findViewById(R.id.cityName);
+        EditText editText = (EditText) findViewById(R.id.txtCityName);
         new GetWeatherTask().execute(editText.getText().toString());
     }
 
     private class GetWeatherTask extends AsyncTask<String, Void, String> {
 
-        private OpenWeatherMap owm = new OpenWeatherMap("");
+        private OpenWeatherMap owm = new OpenWeatherMap(OpenWeatherMap.OWM_URL.PARAMETER_UNITS_VALUE_METRIC, "");
 
         @Override
         protected String doInBackground(String... cityNames) {
@@ -56,11 +56,12 @@ public class MainActivity extends Activity {
                 String cityName = cityNames[0];
                 CurrentWeatherData cwd = owm.currentWeatherByCityName(cityName);
 
-                int temperature = (int) Math.floor((cwd.getMainData_Object().getTemperature() - 32) / 1.8);
-
                 System.out.println("City: " + cwd.getCityName());
-                System.out.println("Temperature: " + cwd.getMainData_Object().getMaxTemperature()
-                        + "/" + cwd.getMainData_Object().getMinTemperature() + "\'F");
+                System.out.println("Temperature: " + cwd.getMainData_Object().getTemperature());
+                System.out.println("Temperature (max/min): "
+                                + cwd.getMainData_Object().getMaxTemperature()
+                                + "/" + cwd.getMainData_Object().getMinTemperature()
+                );
             } catch (Exception e) {
                 e.printStackTrace();
             }
