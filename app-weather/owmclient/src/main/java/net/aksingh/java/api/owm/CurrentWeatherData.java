@@ -683,40 +683,40 @@ public class CurrentWeatherData extends AbstractWeatherData {
     }
 
     // Objects
-    public Clouds getClouds_Object() {
+    public Clouds getCloudsObject() {
         return this.clouds;
     }
 
-    public Coord getCoordinates_Object() {
+    public Coord getCoordObject() {
         return this.coord;
     }
 
-    public Main getMainData_Object() {
+    public Main getMainObject() {
         return this.main;
     }
 
-    public Rain getRain_Object() {
+    public Rain getRainObject() {
         return this.rain;
     }
 
-    public Sys getSysData_Object() {
+    public Sys getSysDataObject() {
         return this.sys;
     }
 
-    public Wind getWind_Object() {
+    public Wind getWindObject() {
         return this.wind;
     }
 
     // Lists
-    public boolean hasWeather_List() {
+    public boolean hasWeatherList() {
         return (this.weatherListCount != 0);
     }
 
-    public int getWeather_List_Count() {
+    public int getWeatherListCount() {
         return this.weatherListCount;
     }
 
-    public List<Weather> getWeather_List() {
+    public List<Weather> getWeatherList() {
         return this.weatherList;
     }
 }

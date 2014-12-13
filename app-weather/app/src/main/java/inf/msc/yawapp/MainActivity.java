@@ -57,10 +57,10 @@ public class MainActivity extends Activity {
                 CurrentWeatherData cwd = owm.currentWeatherByCityName(cityName);
 
                 System.out.println("City: " + cwd.getCityName());
-                System.out.println("Temperature: " + cwd.getMainData_Object().getTemperature());
+                System.out.println("Temperature: " + cwd.getMainObject().getTemperature());
                 System.out.println("Temperature (max/min): "
-                                + cwd.getMainData_Object().getMaxTemperature()
-                                + "/" + cwd.getMainData_Object().getMinTemperature()
+                                + cwd.getMainObject().getMaxTemperature()
+                                + "/" + cwd.getMainObject().getMinTemperature()
                 );
             } catch (Exception e) {
                 e.printStackTrace();
