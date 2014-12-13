@@ -1,9 +1,15 @@
 package inf.msc.yawapp;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import net.aksingh.java.api.owm.CurrentWeatherData;
+import net.aksingh.java.api.owm.OpenWeatherMap;
 
 public class MainActivity extends Activity {
 
@@ -33,5 +39,32 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getWeather(View view) {
+        EditText editText = (EditText) findViewById(R.id.cityName);
+        new GetWeatherTask().execute(editText.getText().toString());
+    }
+
+    private class GetWeatherTask extends AsyncTask<String, Void, String> {
+
+        private OpenWeatherMap owm = new OpenWeatherMap("");
+
+        @Override
+        protected String doInBackground(String... cityNames) {
+            try {
+                String cityName = cityNames[0];
+                CurrentWeatherData cwd = owm.currentWeatherByCityName(cityName);
+
+                int temperature = (int) Math.floor((cwd.getMainData_Object().getTemperature() - 32) / 1.8);
+
+                System.out.println("City: " + cwd.getCityName());
+                System.out.println("Temperature: " + cwd.getMainData_Object().getMaxTemperature()
+                        + "/" + cwd.getMainData_Object().getMinTemperature() + "\'F");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
