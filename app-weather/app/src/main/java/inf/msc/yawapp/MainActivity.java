@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
     private class GetWeatherTask extends AsyncTask<String, Void, String> {
 
-        private OpenWeatherMap owm = new OpenWeatherMap(OpenWeatherMap.OWM_URL.PARAMETER_UNITS_VALUE_METRIC, "");
+        private OpenWeatherMap owm = new OpenWeatherMap();
 
         @Override
         protected String doInBackground(String... cityNames) {

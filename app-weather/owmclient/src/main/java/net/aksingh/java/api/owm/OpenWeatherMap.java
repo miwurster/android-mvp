@@ -371,8 +371,8 @@ public class OpenWeatherMap {
      */
     private final OWM_Response owmResponse;
 
-    public OpenWeatherMap(String apiKey) {
-        this(OWM_URL.PARAMETER_UNITS_VALUE_IMPERIAL, apiKey);
+    public OpenWeatherMap() {
+        this(OWM_URL.PARAMETER_UNITS_VALUE_METRIC, "");
     }
 
     public OpenWeatherMap(OWM_URL unit, String apiKey) {
