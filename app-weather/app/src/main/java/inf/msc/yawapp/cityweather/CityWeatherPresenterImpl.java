@@ -3,7 +3,8 @@ package inf.msc.yawapp.cityweather;
 import javax.inject.Inject;
 
 public class CityWeatherPresenterImpl implements CityWeatherPresenter {
-    @Inject CityWeatherView view;
+    @Inject
+    CityWeatherView view;
 
     @Override
     public void searchCity(String city) {

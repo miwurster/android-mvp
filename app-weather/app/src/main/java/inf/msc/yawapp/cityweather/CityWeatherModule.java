@@ -17,12 +17,14 @@ public class CityWeatherModule {
         this.view = view;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     public CityWeatherPresenter provideCityWeatherPresenter(CityWeatherPresenterImpl presenter) {
         return presenter;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     public CityWeatherView provideCityWeatherView() {
         return view;
     }

@@ -2,7 +2,6 @@ package inf.msc.yawapp;
 
 import dagger.Module;
 import dagger.Provides;
-import inf.msc.yawapp.cityweather.CityWeatherModule;
 
 @Module(
         injects = {

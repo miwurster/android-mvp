@@ -1,6 +1,5 @@
 package inf.msc.yawapp.cityweather;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +13,8 @@ import inf.msc.yawapp.BaseModuleActivity;
 import inf.msc.yawapp.R;
 
 public class CityWeatherActivity extends BaseModuleActivity implements CityWeatherView {
-    @Inject CityWeatherPresenter presenter;
+    @Inject
+    CityWeatherPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
