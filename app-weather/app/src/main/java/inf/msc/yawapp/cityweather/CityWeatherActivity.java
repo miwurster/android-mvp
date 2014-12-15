@@ -1,6 +1,7 @@
 package inf.msc.yawapp.cityweather;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,6 +21,11 @@ public class CityWeatherActivity extends BaseModuleActivity implements CityWeath
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.cityWeatherToolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public void onSearchButtonClick(View view) {

@@ -1,13 +1,13 @@
 package inf.msc.yawapp;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
 import java.util.List;
 
 import dagger.ObjectGraph;
 
-public abstract class BaseModuleActivity extends Activity {
+public abstract class BaseModuleActivity extends ActionBarActivity {
     private ObjectGraph moduleGraph;
 
     @Override
