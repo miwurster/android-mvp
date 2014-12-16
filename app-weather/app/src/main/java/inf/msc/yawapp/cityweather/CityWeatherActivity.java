@@ -25,6 +25,7 @@ public class CityWeatherActivity extends BaseModuleActivity implements CityWeath
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.ic_menu_black_18dp);
         }
     }
 

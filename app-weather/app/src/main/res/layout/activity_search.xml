@@ -13,7 +13,8 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/cityWeatherToolbar"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary" />
 
         <EditText
             android:layout_width="match_parent"
