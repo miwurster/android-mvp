@@ -14,6 +14,11 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     }
 
     @Override
+    public String getCityName() {
+        return data.getCityName();
+    }
+
+    @Override
     public float getCurrentTemperature() {
         return data.getMainObject().getTemperature();
     }

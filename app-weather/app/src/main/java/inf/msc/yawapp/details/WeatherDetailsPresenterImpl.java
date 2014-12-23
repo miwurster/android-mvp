@@ -18,6 +18,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
         weatherSearchInteractor.search(query, new WeatherDataListener() {
             @Override
             public void onWeatherDataAvailable(WeatherData data) {
+                view.showCityName(data.getCityName());
                 view.showCurrentTemperature(data.getCurrentTemperature());
             }
 

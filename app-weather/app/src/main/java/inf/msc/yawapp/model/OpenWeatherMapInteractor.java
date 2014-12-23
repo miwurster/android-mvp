@@ -15,9 +15,12 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
         protected String doInBackground(String... params) {
             try {
                 CurrentWeatherData cwd = owm.currentWeatherByCityName(params[0]);
-                if (listener != null) {
-                    cwd.getMainObject().getTemperature();
-                    listener.onWeatherDataAvailable(new OpenWeatherMapWeatherData(cwd));
+                try {
+                    if (listener != null) {
+                        listener.onWeatherDataAvailable(new OpenWeatherMapWeatherData(cwd));
+                    }
+                } catch (Exception e) {
+                    // TODO: Log error
                 }
             } catch (Exception e) {
                 if (listener != null) {
