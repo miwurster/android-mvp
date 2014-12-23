@@ -22,6 +22,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     WeatherDetailsPresenter presenter;
 
     private Toolbar toolbar;
+    private MenuItem searchItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,13 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
         getMenuInflater().inflate(R.menu.search, menu);
         final MenuItem searchItem = menu.findItem(R.id.action_search);
+        this.searchItem = searchItem;
         if (searchItem != null) {
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             final SearchView view = (SearchView) searchItem.getActionView();
             if (view != null) {
                 view.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-                view.setIconified(false);
+                view.setIconified(true);
                 view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String s) {
@@ -52,13 +54,8 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
                     @Override
                     public boolean onQueryTextChange(String s) {
+                        // TODO: Lookup in city dictionary here
                         return true;
-                    }
-                });
-                view.setOnCloseListener(new SearchView.OnCloseListener() {
-                    @Override
-                    public boolean onClose() {
-                        return false;
                     }
                 });
             }
