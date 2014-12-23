@@ -1,9 +1,10 @@
-package inf.msc.yawapp.cityweather;
+package inf.msc.yawapp.details;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +14,9 @@ import javax.inject.Inject;
 import inf.msc.yawapp.BaseModuleActivity;
 import inf.msc.yawapp.R;
 
-public class CityWeatherActivity extends BaseModuleActivity implements CityWeatherView {
+public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
     @Inject
-    CityWeatherPresenter presenter;
+    WeatherDetailsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +32,21 @@ public class CityWeatherActivity extends BaseModuleActivity implements CityWeath
 
     public void onSearchButtonClick(View view) {
         EditText searchWidget = (EditText) findViewById(R.id.txtCityName);
-        presenter.searchCity(searchWidget.getText().toString());
+        presenter.search(searchWidget.getText().toString());
     }
 
     @Override
-    public void setHistory(List<String> history) {
+    public void showSearchError(String message) {
     }
 
     @Override
-    public void setSearchError(String message) {
+    public void showCurrentTemperature(float temperature) {
+        TextView textWidget = (TextView) findViewById(R.id.textView);
+        textWidget.setText(Float.toString(temperature) + " °C");
     }
 
     @Override
     protected List<Object> getModules() {
-        return Arrays.<Object>asList(new CityWeatherModule(this));
+        return Arrays.<Object>asList(new WeatherDetailsModule(this));
     }
 }

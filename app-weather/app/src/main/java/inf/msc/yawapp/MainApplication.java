@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
+import inf.msc.yawapp.model.ModelModule;
 
 public class MainApplication extends Application {
     private ObjectGraph objectGraph;
@@ -18,7 +19,9 @@ public class MainApplication extends Application {
     }
 
     private List<Object> getModules() {
-        return Arrays.<Object>asList(new MainModule(this));
+        return Arrays.<Object>asList(
+                new MainModule(this),
+                new ModelModule());
     }
 
     public ObjectGraph createSubGraph(Object... modules) {
