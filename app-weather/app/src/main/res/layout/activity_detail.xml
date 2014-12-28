@@ -10,9 +10,7 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/weatherSearchToolbar"
-            layout="@layout/toolbar" />
+        <include layout="@layout/toolbar_actionbar" />
 
         <TextView
             android:id="@+id/textView"

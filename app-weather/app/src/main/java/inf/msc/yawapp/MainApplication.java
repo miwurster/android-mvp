@@ -9,6 +9,7 @@ import dagger.ObjectGraph;
 import inf.msc.yawapp.model.ModelModule;
 
 public class MainApplication extends Application {
+
     private ObjectGraph objectGraph;
 
     @Override

@@ -9,6 +9,7 @@ import dagger.Provides;
         }
 )
 public class MainModule {
+
     private final MainApplication application;
 
     public MainModule(MainApplication application) {
