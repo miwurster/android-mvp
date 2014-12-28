@@ -1,17 +1,18 @@
 package inf.msc.yawapp;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.List;
 
 import dagger.ObjectGraph;
 
-public abstract class BaseModuleActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity {
+
     private ObjectGraph moduleGraph;
-    private Toolbar actionBarToolbar;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +27,14 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
         moduleGraph = null;
     }
 
-    protected Toolbar getActionBarToolbar() {
-        if (actionBarToolbar == null) {
-            actionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
-            if (actionBarToolbar != null) {
-                setSupportActionBar(actionBarToolbar);
+    protected Toolbar getToolbar() {
+        if (toolbar == null) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
             }
         }
-        return actionBarToolbar;
+        return toolbar;
     }
 
     protected abstract List<Object> getModules();
