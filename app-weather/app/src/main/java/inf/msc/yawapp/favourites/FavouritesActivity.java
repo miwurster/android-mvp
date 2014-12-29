@@ -73,7 +73,15 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
 
                     @Override
                     public boolean onQueryTextChange(String s) {
+                        presenter.search(s); //Performance ?
+                        return true;
+                    }
+                });
 
+                view.setOnCloseListener(new SearchView.OnCloseListener() {
+                    @Override
+                    public boolean onClose() {
+                        presenter.update();
                         return true;
                     }
                 });

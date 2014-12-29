@@ -10,6 +10,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import inf.msc.yawapp.MainApplication;
+
 /**
  * Created by Sebastian on 29.12.2014.
  */
@@ -20,7 +24,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
 
     //basic settings for database
     private static final String DATABASE_NAME = "favourites.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     //table name
     private static final String FAV_TABLE = "favourites";
@@ -37,57 +41,70 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
     //SQL Commands
     public static final String CREATE = "CREATE TABLE "
             +FAV_TABLE+" ("
-            +ID+" INT PRIMARY KEY AUTOINCREMENT, "
+            +ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             +LONGITUDE+" VARCHAR(255), "
             +LATITUDE+" VARCHAR(255), "
             +COUNTRY+" VARCHAR(255), "
             +ZIP+" VARCHAR(255), "
             +CITY+" VARCHAR(255), "
-            +ADDRESS+" VARCHAR(255), "
-            +"PRIMARY KEY ("+ID+"))";
+            +ADDRESS+" VARCHAR(255))";
+            //+"PRIMARY KEY ("+ID+"))";
     public static final String DROP = "DROP TABLE IF EXISTS "+ FAV_TABLE;
 
+
+    private SQLiteDatabase db;
 
     /**
      * Constructor
      * @param context
      */
-    public FavouritesDataImpl (Context context){
+    @Inject
+    public FavouritesDataImpl (MainApplication context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    private SQLiteDatabase getSQLiteDB(){
+        if(this.db == null){
+            this.db = getWritableDatabase();
+        }
+        return this.db;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        this.db = db;
         db.execSQL(CREATE);
+
+
 
         if(DEBUG){
             Location l0 = new Location();
-            l0.setCity("Böblingen");
-            l0.setZip("71034");
+            l0.setCity("Stuttgart");
+            l0.setZip("73445");
             l0.setCountry("DE");
-            l0.setAddress("Danziger Straße 6");
+            l0.setAddress("Königsstraße 10");
             this.add(l0);
 
             Location l1 = new Location();
-            l1.setCity("Berlin");
-            l1.setZip("10001");
+            l1.setCity("München");
+            l1.setZip("80001");
             l1.setCountry("DE");
-            l1.setAddress("Unter den Linden");
+            l1.setAddress("");
             this.add(l1);
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        this.db = db;
         db.execSQL(DROP);
-        db.execSQL(CREATE);
+        onCreate(db);
     }
 
     @Override
     public void add(Location loc) {
 
-        SQLiteDatabase db = getWritableDatabase();
+        //db = getWritableDatabase();
 
         //Entry:
         ContentValues values = new ContentValues();
@@ -98,7 +115,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
         values.put(CITY,loc.getCity());
         values.put(ADDRESS,loc.getAddress());
 
-        long rowID = db.insert(FAV_TABLE,null,values);
+        long rowID = getSQLiteDB().insert(FAV_TABLE,null,values);
 
         Log.d(TAG,"location added with rowID: "+rowID);
 
@@ -107,7 +124,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
     @Override
     public void update(Location loc) {
 
-        SQLiteDatabase db = getWritableDatabase();
+        //SQLiteDatabase db = getWritableDatabase();
 
         //Entry:
         ContentValues values = new ContentValues();
@@ -118,7 +135,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
         values.put(CITY,loc.getCity());
         values.put(ADDRESS,loc.getAddress());
 
-        long rowID = db.update(FAV_TABLE,values,ID+ " = ? ",new String[]{Long.toString(loc.getId())});
+        long rowID = getSQLiteDB().update(FAV_TABLE,values,ID+ " = ? ",new String[]{Long.toString(loc.getId())});
 
         Log.d(TAG,"location updated with rowID: "+rowID);
 
@@ -128,8 +145,8 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
 
     @Override
     public void delete(long id) {
-        SQLiteDatabase db = getWritableDatabase();
-        long rowID = db.delete(FAV_TABLE, ID + " = ? ", new String[]{Long.toString(id)});
+        //SQLiteDatabase db = getWritableDatabase();
+        long rowID = getSQLiteDB().delete(FAV_TABLE, ID + " = ? ", new String[]{Long.toString(id)});
 
         Log.d(TAG,"location deleted with rowID: "+rowID);
     }
@@ -137,13 +154,13 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
     @Override
     public Location get(long id) {
 
-        SQLiteDatabase db = getReadableDatabase();
+        //SQLiteDatabase db = getWritableDatabase();
 
 
         //SELECT * FROM FAV_TABLE WHERE ID = id GROUP BY CITY
-        Cursor c = db.query(FAV_TABLE,null,ID + "= ?", new String[]{Long.toString(id)},null,null,CITY);
+        Cursor c = getSQLiteDB().query(FAV_TABLE,null,ID + "= ?", new String[]{Long.toString(id)},null,null,CITY);
 
-        if(c.moveToFirst()){ return null;} //empty case
+        if(!c.moveToFirst()){ return null;} //empty case
 
         //otherwise
         Location loc = new Location();
@@ -151,7 +168,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
             loc.setId(c.getLong(c.getColumnIndex(ID)));
             loc.setLongitude(c.getString(c.getColumnIndex(LONGITUDE)));
             loc.setLatitude(c.getString(c.getColumnIndex(LATITUDE)));
-            loc.setCountry(c.getString(c.getColumnIndex(CITY)));
+            loc.setCountry(c.getString(c.getColumnIndex(COUNTRY)));
             loc.setZip(c.getString(c.getColumnIndex(ZIP)));
             loc.setCity(c.getString(c.getColumnIndex(CITY)));
             loc.setAddress(c.getString(c.getColumnIndex(ADDRESS)));
@@ -164,13 +181,18 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
 
     @Override
     public List<Location> getAll() {
-        SQLiteDatabase db = getReadableDatabase();
-
+        //SQLiteDatabase db = getWritableDatabase();
+        Log.d(TAG,"getAll SQL");
 
         //SELECT * FROM FAV_TABLE GROUP BY CITY
-        Cursor c = db.query(FAV_TABLE,null,null, null,null,null,CITY);
+        Cursor c = getSQLiteDB().query(FAV_TABLE,null,null, null,null,null,CITY);
 
-        if(c.moveToFirst()){ return new ArrayList<Location>();} //empty case
+        if(!c.moveToFirst()){
+
+            Log.d(TAG,"Cursor is empty");
+            return new ArrayList<Location>();
+
+        } //empty case
 
         //otherwise
        List<Location> locs = new ArrayList<Location>();
@@ -179,10 +201,11 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
             loc.setId(c.getLong(c.getColumnIndex(ID)));
             loc.setLongitude(c.getString(c.getColumnIndex(LONGITUDE)));
             loc.setLatitude(c.getString(c.getColumnIndex(LATITUDE)));
-            loc.setCountry(c.getString(c.getColumnIndex(CITY)));
+            loc.setCountry(c.getString(c.getColumnIndex(COUNTRY)));
             loc.setZip(c.getString(c.getColumnIndex(ZIP)));
             loc.setCity(c.getString(c.getColumnIndex(CITY)));
             loc.setAddress(c.getString(c.getColumnIndex(ADDRESS)));
+            Log.d(TAG,"Location loaded with ID "+loc.getId());
 
             locs.add(loc);
         }while(c.moveToNext());
@@ -193,21 +216,21 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
 
     @Override
     public List<Location> search(String query) {
-        SQLiteDatabase db = getReadableDatabase();
+        //SQLiteDatabase db = getWritableDatabase();
 
 
         //SELECT * FROM FAV_TABLE WHERE [wh_String] GROUP BY CITY
-        String wh_String =  CITY +" = ? OR "+
-                            ZIP +" = ? OR "+
-                            COUNTRY +" = ? OR "+
-                            ADDRESS +" = ? ";
-        String[] queries = new String[]{query,query,query,query}; //for each ? in wh_String
+        String wh_String =  CITY +" LIKE ? OR "+
+                            ZIP +" LIKE ? OR "+
+                            COUNTRY +" LIKE ? OR "+
+                            ADDRESS +" LIKE ? ";
+        String[] queries = new String[]{"%"+query+"%",query+"%","%"+query+"%","%"+query+"%"}; //for each ? in wh_String
 
-        Cursor c = db.query(FAV_TABLE,null,wh_String, queries,null,null,CITY);
+        Cursor c = getSQLiteDB().query(FAV_TABLE,null,wh_String, queries,null,null,CITY);
 
 
 
-        if(c.moveToFirst()){ return new ArrayList<Location>();} //empty case
+        if(!c.moveToFirst()){ return new ArrayList<Location>();} //empty case
 
         //otherwise
         List<Location> locs = new ArrayList<Location>();
@@ -216,7 +239,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
             loc.setId(c.getLong(c.getColumnIndex(ID)));
             loc.setLongitude(c.getString(c.getColumnIndex(LONGITUDE)));
             loc.setLatitude(c.getString(c.getColumnIndex(LATITUDE)));
-            loc.setCountry(c.getString(c.getColumnIndex(CITY)));
+            loc.setCountry(c.getString(c.getColumnIndex(COUNTRY)));
             loc.setZip(c.getString(c.getColumnIndex(ZIP)));
             loc.setCity(c.getString(c.getColumnIndex(CITY)));
             loc.setAddress(c.getString(c.getColumnIndex(ADDRESS)));

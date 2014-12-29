@@ -54,7 +54,9 @@ public class FavouritesPresenterImpl implements FavouritesPresenter {
 
     @Override
     public void search(String query) {
-        view.clearView();
-        view.addFavourites(model.search(query));
+        if(query.trim().compareTo("")!=0) {
+            view.clearView();
+            view.addFavourites(model.search(query));
+        }
     }
 }

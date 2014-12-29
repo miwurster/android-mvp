@@ -9,6 +9,9 @@ import dagger.ObjectGraph;
 import inf.msc.yawapp.model.ModelModule;
 
 public class MainApplication extends Application {
+
+    //public static Application app = null;
+
     private ObjectGraph objectGraph;
 
     @Override
@@ -16,6 +19,7 @@ public class MainApplication extends Application {
         super.onCreate();
         objectGraph = ObjectGraph.create(getModules().toArray());
         objectGraph.inject(this);
+        //app = this;
     }
 
     private List<Object> getModules() {

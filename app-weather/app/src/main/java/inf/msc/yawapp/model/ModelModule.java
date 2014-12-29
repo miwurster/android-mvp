@@ -8,17 +8,18 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import inf.msc.yawapp.MainApplication;
+import inf.msc.yawapp.MainModule;
 
 @Module(
         injects ={
                 WeatherSearchInteractor.class,
-                FavouritesData.class
-        }
+                //FavouritesData.class
+        },
+        complete = false,
+        library = true
 )
 public class ModelModule {
 
-    @Inject
-    MainApplication main;
 
     @Provides
     @Singleton
@@ -29,8 +30,8 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public FavouritesData provideFavouritesData(){
-        return new FavouritesDataImpl(main);
+    public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData){
+        return favouritesData;
     }
 
 }
