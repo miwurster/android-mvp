@@ -24,6 +24,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
             @Override
             public void onWeatherDataAvailable(WeatherData data) {
                 view.showCityName(data.getCityName());
+                view.showWeatherCondition(data.getCondition(), data.isDay());
                 weatherDataObservable.notifyAll(data);
             }
 

@@ -13,14 +13,14 @@
 
         <LinearLayout
             android:id="@+id/city_header"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
             android:clipChildren="false"
             android:clipToPadding="false"
+            android:orientation="vertical"
             android:paddingBottom="16dp"
-            android:paddingTop="16dp"
-            android:background="?attr/colorPrimary">
+            android:paddingTop="16dp">
 
             <include
                 android:id="@+id/weatherSearchToolbar"
@@ -29,28 +29,47 @@
             <!-- City Name -->
             <TextView
                 android:id="@+id/city_name"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:text="CITY NAME"
-                android:maxLines="2"
                 android:ellipsize="end"
-                android:textSize="18sp"
-                android:lineSpacingMultiplier="1.1"
-                android:textStyle="bold"
                 android:fontFamily="sans-serif"
+                android:lineSpacingMultiplier="1.1"
+                android:maxLines="2"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                android:textAlignment="viewStart" />
+            <!-- Condition Text -->
+            <TextView
+                android:id="@+id/city_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:textAlignment="viewStart"
+                android:text="" />
 
         </LinearLayout>
 
-        <fragment
-            android:id="@+id/current_weather_fragment"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="inf.msc.yawapp.details.current.CurrentWeatherFragment" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <fragment
+                android:id="@+id/current_weather_fragment"
+                class="inf.msc.yawapp.details.current.CurrentWeatherFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

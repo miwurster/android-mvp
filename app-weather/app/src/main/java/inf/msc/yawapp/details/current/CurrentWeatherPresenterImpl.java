@@ -2,6 +2,7 @@ package inf.msc.yawapp.details.current;
 
 import javax.inject.Inject;
 
+import inf.msc.yawapp.MainApplication;
 import inf.msc.yawapp.common.GenericObservable;
 import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.WeatherData;
@@ -9,6 +10,9 @@ import inf.msc.yawapp.model.WeatherData;
 public class CurrentWeatherPresenterImpl implements CurrentWeatherPresenter, GenericObserver<WeatherData> {
     @Inject
     CurrentWeatherView view;
+
+    @Inject
+    MainApplication application;
 
     @Inject
     GenericObservable<WeatherData> weatherDataObservable;
