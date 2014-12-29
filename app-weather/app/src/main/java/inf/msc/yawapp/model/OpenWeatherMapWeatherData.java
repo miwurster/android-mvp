@@ -62,6 +62,16 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     }
 
     @Override
+    public float getMinTemperature() {
+        return data.getMainObject().getMinTemperature();
+    }
+
+    @Override
+    public float getMaxTemperature() {
+        return data.getMainObject().getMaxTemperature();
+    }
+
+    @Override
     public Condition getCondition() {
         return condition;
     }

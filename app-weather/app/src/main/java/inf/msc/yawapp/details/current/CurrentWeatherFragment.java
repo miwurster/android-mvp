@@ -21,11 +21,15 @@ import inf.msc.yawapp.model.WeatherData;
 
 public class CurrentWeatherFragment extends BaseModuleFragment implements CurrentWeatherView {
 
+    public static final String TEMPERATURE_CELCIUS = "%.1f °C";
+
     @Inject
     CurrentWeatherPresenter presenter;
 
     private TextView weatherIcon;
     private TextView temperatureBlock;
+    private TextView minTemperature;
+    private TextView maxTemperature;
 
     private final Map<WeatherData.Condition, String> conditionStringMap;
 
@@ -54,6 +58,8 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         super.onViewCreated(view, savedInstanceState);
         weatherIcon = (TextView) view.findViewById(R.id.weather_icon);
         temperatureBlock = (TextView) view.findViewById(R.id.temperature_block);
+        minTemperature = (TextView) view.findViewById(R.id.temperature_min);
+        maxTemperature = (TextView) view.findViewById(R.id.temperature_max);
 
         weatherIcon.setTypeface(Typeface.createFromAsset(getActivity().getApplication().getAssets(), "fonts/weathericons-regular-webfont.ttf"));
 
@@ -72,7 +78,9 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                temperatureBlock.setText(Float.toString(weatherData.getCurrentTemperature()));
+                temperatureBlock.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getCurrentTemperature()));
+                minTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMinTemperature()));
+                maxTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMaxTemperature()));
                 weatherIcon.setText(conditionStringMap.get(weatherData.getCondition()));
             }
         });

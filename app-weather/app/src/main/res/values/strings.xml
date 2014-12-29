@@ -7,6 +7,9 @@
     <string name="action_search">Search Cities</string>
 
     <string name="weather_temperature_header">Temperature</string>
+    <string name="weather_temperature_min">Min:</string>
+    <string name="weather_temperature_max">Max:</string>
+
     <string name="weather_condition_clear">Clear Sky</string>
     <string name="weather_condition_few_clouds">Few Clouds</string>
     <string name="weather_condition_scattered_clouds">Scattered Clouds</string>

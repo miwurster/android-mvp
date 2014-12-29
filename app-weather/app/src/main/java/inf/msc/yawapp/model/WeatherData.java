@@ -10,6 +10,10 @@ public interface WeatherData {
 
     public float getCurrentTemperature();
 
+    public float getMinTemperature();
+
+    public float getMaxTemperature();
+
     public Condition getCondition();
 
     public boolean isDay();

@@ -68,7 +68,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         switch (item.getItemId()) {
             case R.id.action_search:
                 //startActivity(new Intent(this, SearchActivity.class));
-                presenter.search("Stuttgart");
+                presenter.search("Rio");
                 return true;
         }
         return super.onOptionsItemSelected(item);
