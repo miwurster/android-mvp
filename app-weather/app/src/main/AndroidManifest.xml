@@ -36,6 +36,10 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <!--<provider-->
+            <!--android:name=".search.SearchHistoryProvider"-->
+            <!--android:authorities="inf.msc.yawapp.search.SearchHistoryProvider" />-->
+
     </application>
 
 </manifest>

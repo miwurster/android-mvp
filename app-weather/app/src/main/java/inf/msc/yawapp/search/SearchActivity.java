@@ -1,21 +1,27 @@
 package inf.msc.yawapp.search;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.Arrays;
 import java.util.List;
 
 import inf.msc.yawapp.BaseActivity;
 import inf.msc.yawapp.R;
+import inf.msc.yawapp.details.WeatherDetailsActivity;
 
 public class SearchActivity extends BaseActivity {
 
@@ -33,9 +39,8 @@ public class SearchActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navigateUpToFromChild(SearchActivity.this,
-                //        IntentCompat.makeMainActivity(new ComponentName(SearchActivity.this,
-                //                BrowseSessionsActivity.class)));
+                navigateUpToFromChild(SearchActivity.this,
+                        IntentCompat.makeMainActivity(new ComponentName(SearchActivity.this, WeatherDetailsActivity.class)));
             }
         });
 
@@ -45,6 +50,22 @@ public class SearchActivity extends BaseActivity {
         if (searchView != null) {
             searchView.setQuery(query, false);
         }
+
+        Intent intent = getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+        }
+
+        ListView listView = (ListView) findViewById(R.id.fragment_container);
+
+        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
+                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+                "Linux", "OS/2"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values);
+        listView.setAdapter(adapter);
 
         overridePendingTransition(0, 0);
     }

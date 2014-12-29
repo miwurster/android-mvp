@@ -66,7 +66,7 @@ public class WeatherDetailsActivity extends BaseActivity implements WeatherDetai
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.details, menu);
         return true;
     }
 
