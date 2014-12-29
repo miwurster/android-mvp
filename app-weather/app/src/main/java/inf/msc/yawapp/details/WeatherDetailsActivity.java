@@ -14,21 +14,27 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.BaseModuleActivity;
+import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.R;
 
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
     @Inject
     WeatherDetailsPresenter presenter;
 
-    private Toolbar toolbar;
     private MenuItem searchItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        toolbar = getActionBarToolbar();
+
+        final Toolbar toolbar = getActionBarToolbar();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                toolbar.setTitle("");
+            }
+        });
     }
 
     @Override
@@ -72,15 +78,10 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                toolbar.setTitle(city);
+                TextView cityName = (TextView) findViewById(R.id.city_name);
+                cityName.setText(city);
             }
         });
-    }
-
-    @Override
-    public void showCurrentTemperature(float temperature) {
-        TextView textWidget = (TextView) findViewById(R.id.textView);
-        textWidget.setText(Float.toString(temperature) + " °C");
     }
 
     @Override

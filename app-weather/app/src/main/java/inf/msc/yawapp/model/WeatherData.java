@@ -11,4 +11,6 @@ public interface WeatherData {
     public float getCurrentTemperature();
 
     public Condition getCondition();
+
+    public boolean isDay();
 }

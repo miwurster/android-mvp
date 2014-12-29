@@ -1,13 +1,14 @@
-package inf.msc.yawapp;
+package inf.msc.yawapp.common;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.List;
 
 import dagger.ObjectGraph;
+import inf.msc.yawapp.MainApplication;
+import inf.msc.yawapp.R;
 
 public abstract class BaseModuleActivity extends ActionBarActivity {
     private ObjectGraph moduleGraph;

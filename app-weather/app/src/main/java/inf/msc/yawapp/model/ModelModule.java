@@ -4,9 +4,13 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import inf.msc.yawapp.common.GenericObservable;
 
 @Module(
-        injects = WeatherSearchInteractor.class
+        injects = {
+                WeatherSearchInteractor.class
+        },
+        library = true
 )
 public class ModelModule {
 
@@ -14,5 +18,11 @@ public class ModelModule {
     @Singleton
     public WeatherSearchInteractor provideWeatherSearchInteractor() {
         return new OpenWeatherMapInteractor();
+    }
+
+    @Provides
+    @Singleton
+    public GenericObservable<WeatherData> provideWeatherDataObservable() {
+        return new GenericObservable<WeatherData>();
     }
 }

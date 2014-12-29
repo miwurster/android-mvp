@@ -10,17 +10,47 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/weatherSearchToolbar"
-            layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/city_header"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:background="?attr/colorPrimary">
+
+            <include
+                android:id="@+id/weatherSearchToolbar"
+                layout="@layout/toolbar" />
+
+            <!-- City Name -->
+            <TextView
+                android:id="@+id/city_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="CITY NAME"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:lineSpacingMultiplier="1.1"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/current_weather_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="inf.msc.yawapp.details.current.CurrentWeatherFragment" />
 
     </LinearLayout>
 </RelativeLayout>
