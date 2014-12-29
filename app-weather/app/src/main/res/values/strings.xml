@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">Yet Another Weather App</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name_short">yaWapp</string>
 
-    <string name="btnSearch">Get Weather</string>
+    <string name="action_search">Search Cities</string>
 
 </resources>

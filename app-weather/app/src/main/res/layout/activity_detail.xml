@@ -24,7 +24,7 @@
 
             <include
                 android:id="@+id/weatherSearchToolbar"
-                layout="@layout/toolbar" />
+                layout="@layout/toolbar_actionbar" />
 
             <!-- City Name -->
             <TextView
