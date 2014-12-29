@@ -31,20 +31,35 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
     private TextView minTemperature;
     private TextView maxTemperature;
 
-    private final Map<WeatherData.Condition, String> conditionStringMap;
+    private static final Map<WeatherData.Condition, String> CONDITIONS_DAY;
+    private static final Map<WeatherData.Condition, String> CONDITIONS_NIGHT;
 
-    {
-        conditionStringMap = new HashMap<>();
-        conditionStringMap.put(WeatherData.Condition.NOT_AVAILABLE, "\uf053");
-        conditionStringMap.put(WeatherData.Condition.CLEAR, "\uf00d");
-        conditionStringMap.put(WeatherData.Condition.FEW_CLOUDS, "\uf00c");
-        conditionStringMap.put(WeatherData.Condition.SCATTERED_CLOUDS, "\uf002");
-        conditionStringMap.put(WeatherData.Condition.BROKEN_CLOUDS, "\uf013");
-        conditionStringMap.put(WeatherData.Condition.SHOWER_RAIN, "\uf0b5");
-        conditionStringMap.put(WeatherData.Condition.RAIN, "\uf037");
-        conditionStringMap.put(WeatherData.Condition.THUNDERSTORM, "\uf01d");
-        conditionStringMap.put(WeatherData.Condition.SNOW, "\uf01b");
-        conditionStringMap.put(WeatherData.Condition.MIST, "\uf014");
+    static {
+        CONDITIONS_DAY = new HashMap<>();
+        CONDITIONS_DAY.put(WeatherData.Condition.NOT_AVAILABLE, "\uf053");
+        CONDITIONS_DAY.put(WeatherData.Condition.CLEAR, "\uf00d");
+        CONDITIONS_DAY.put(WeatherData.Condition.FEW_CLOUDS, "\uf00c");
+        CONDITIONS_DAY.put(WeatherData.Condition.SCATTERED_CLOUDS, "\uf002");
+        CONDITIONS_DAY.put(WeatherData.Condition.BROKEN_CLOUDS, "\uf013");
+        CONDITIONS_DAY.put(WeatherData.Condition.SHOWER_RAIN, "\uf0b5");
+        CONDITIONS_DAY.put(WeatherData.Condition.RAIN, "\uf037");
+        CONDITIONS_DAY.put(WeatherData.Condition.THUNDERSTORM, "\uf01d");
+        CONDITIONS_DAY.put(WeatherData.Condition.SNOW, "\uf01b");
+        CONDITIONS_DAY.put(WeatherData.Condition.MIST, "\uf014");
+    }
+
+    static {
+        CONDITIONS_NIGHT = new HashMap<>();
+        CONDITIONS_NIGHT.put(WeatherData.Condition.NOT_AVAILABLE, "\uf053");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.CLEAR, "\uf02e");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.FEW_CLOUDS, "\uf086");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.SCATTERED_CLOUDS, "\uf041");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.BROKEN_CLOUDS, "\uf013");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.SHOWER_RAIN, "\uf0b5");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.RAIN, "\uf0b4");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.THUNDERSTORM, "\uf01d");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.SNOW, "\uf01b");
+        CONDITIONS_NIGHT.put(WeatherData.Condition.MIST, "\uf014");
     }
 
     @Nullable
@@ -81,7 +96,11 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
                 temperatureBlock.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getCurrentTemperature()));
                 minTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMinTemperature()));
                 maxTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMaxTemperature()));
-                weatherIcon.setText(conditionStringMap.get(weatherData.getCondition()));
+                if (!weatherData.isDay()) {
+                    weatherIcon.setText(CONDITIONS_NIGHT.get(weatherData.getCondition()));
+                } else {
+                    weatherIcon.setText(CONDITIONS_DAY.get(weatherData.getCondition()));
+                }
             }
         });
     }
