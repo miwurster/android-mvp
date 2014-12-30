@@ -17,4 +17,8 @@ public interface WeatherData {
     public Condition getCondition();
 
     public boolean isDay();
+
+    public float getWindDirection();
+
+    public float getWindSpeed();
 }

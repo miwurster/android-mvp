@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_vertical">
 
         <!-- Weather Condition Icon -->
         <TextView
@@ -19,14 +20,14 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/margin_vertical_tiny"
             android:gravity="start"
-            android:textSize="72dp"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="72dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/keyline3"
             android:layout_marginTop="@dimen/margin_vertical_tiny"
@@ -35,49 +36,109 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/SectionHeader"
-                android:text="@string/weather_temperature_header"/>
+                android:text="@string/weather_temperature_header"
+                android:theme="@style/SectionHeader" />
 
             <!-- Temperature -->
             <TextView
                 android:id="@+id/temperature_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:layout_marginTop="@dimen/margin_vertical">
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:columnCount="2">
 
                 <TextView
                     android:layout_column="0"
-                    android:text="@string/weather_temperature_min"
                     android:layout_marginEnd="@dimen/margin_horizontal"
-                    />
+                    android:text="@string/weather_temperature_min" />
 
                 <!-- Temperature Min -->
                 <TextView
                     android:id="@+id/temperature_min"
-                    android:layout_column="1"
-                    />
+                    android:layout_column="1" />
 
                 <TextView
                     android:layout_column="0"
-                    android:text="@string/weather_temperature_max"
                     android:layout_marginEnd="@dimen/margin_horizontal"
-                    />
+                    android:text="@string/weather_temperature_max" />
 
                 <!-- Temperature Max -->
                 <TextView
                     android:id="@+id/temperature_max"
-                    android:layout_column="1"
-                    />
+                    android:layout_column="1" />
             </GridLayout>
 
         </LinearLayout>
     </RelativeLayout>
 
 
+    <!-- Wind Block -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_vertical">
+
+        <!-- Wind Direction Icon -->
+        <TextView
+            android:id="@+id/wind_icon"
+            android:layout_width="@dimen/keyline3"
+            android:layout_height="@dimen/keyline3"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/margin_vertical_tiny"
+            android:gravity="start"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="72dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/keyline3"
+            android:layout_marginTop="@dimen/margin_vertical_tiny"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/weather_wind_header"
+                android:theme="@style/SectionHeader.Separator" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2">
+
+                <TextView
+                    android:layout_column="0"
+                    android:layout_marginEnd="@dimen/margin_horizontal"
+                    android:text="@string/weather_wind_speed" />
+
+                <!-- Wind Speed-->
+                <TextView
+                    android:id="@+id/wind_speed"
+                    android:layout_column="1" />
+
+                <TextView
+                    android:layout_column="0"
+                    android:layout_marginEnd="@dimen/margin_horizontal"
+                    android:text="@string/weather_wind_direction" />
+
+                <!-- Wind Direction -->
+                <TextView
+                    android:id="@+id/wind_direction"
+                    android:layout_column="1" />
+            </GridLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

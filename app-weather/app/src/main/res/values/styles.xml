@@ -43,5 +43,8 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="SectionHeader.Separator" parent="SectionHeader">
+        <item name="android:background">@drawable/section_separator</item>
+    </style>
 
 </resources>

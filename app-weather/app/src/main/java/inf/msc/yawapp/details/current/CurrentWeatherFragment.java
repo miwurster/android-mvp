@@ -22,6 +22,8 @@ import inf.msc.yawapp.model.WeatherData;
 public class CurrentWeatherFragment extends BaseModuleFragment implements CurrentWeatherView {
 
     public static final String TEMPERATURE_CELCIUS = "%.1f °C";
+    public static final String WIND_SPEED_MPS = "%.1f mps";
+    public static final String WIND_DIRECTION_DEGREES = "%.1f °";
 
     @Inject
     CurrentWeatherPresenter presenter;
@@ -30,9 +32,13 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
     private TextView temperatureBlock;
     private TextView minTemperature;
     private TextView maxTemperature;
+    private TextView windIcon;
+    private TextView windSpeed;
+    private TextView windDirection;
 
     private static final Map<WeatherData.Condition, String> CONDITIONS_DAY;
     private static final Map<WeatherData.Condition, String> CONDITIONS_NIGHT;
+    private static final Map<Integer, String> WIND_DIRECTIONS;
 
     static {
         CONDITIONS_DAY = new HashMap<>();
@@ -62,6 +68,28 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         CONDITIONS_NIGHT.put(WeatherData.Condition.MIST, "\uf014");
     }
 
+    static {
+        WIND_DIRECTIONS = new HashMap<>();
+        WIND_DIRECTIONS.put(0, "\uf05c");
+        WIND_DIRECTIONS.put(45, "\uf05a");
+        WIND_DIRECTIONS.put(90, "\uf059");
+        WIND_DIRECTIONS.put(135, "\uf05d");
+        WIND_DIRECTIONS.put(180, "\uf060");
+        WIND_DIRECTIONS.put(225, "\uf05e");
+        WIND_DIRECTIONS.put(270, "\uf061");
+        WIND_DIRECTIONS.put(315, "\uf05b");
+    }
+
+    private static String getWindDirectionIcon(float degrees) {
+        int d = Math.round(degrees) % 360;
+        int delta = d % 15;
+        d -= delta;
+        if (delta > 7) {
+            d += 15;
+        }
+        return WIND_DIRECTIONS.get(d);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +103,13 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         temperatureBlock = (TextView) view.findViewById(R.id.temperature_block);
         minTemperature = (TextView) view.findViewById(R.id.temperature_min);
         maxTemperature = (TextView) view.findViewById(R.id.temperature_max);
+        windIcon = (TextView) view.findViewById(R.id.wind_icon);
+        windSpeed = (TextView) view.findViewById(R.id.wind_speed);
+        windDirection = (TextView) view.findViewById(R.id.wind_direction);
 
-        weatherIcon.setTypeface(Typeface.createFromAsset(getActivity().getApplication().getAssets(), "fonts/weathericons-regular-webfont.ttf"));
+        Typeface weatherIconFont = Typeface.createFromAsset(getActivity().getApplication().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        weatherIcon.setTypeface(weatherIconFont);
+        windIcon.setTypeface(weatherIconFont);
 
         presenter.register();
     }
@@ -93,6 +126,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // Temperature Block
                 temperatureBlock.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getCurrentTemperature()));
                 minTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMinTemperature()));
                 maxTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMaxTemperature()));
@@ -101,6 +135,11 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
                 } else {
                     weatherIcon.setText(CONDITIONS_DAY.get(weatherData.getCondition()));
                 }
+
+                // Wind Block
+                windIcon.setText(getWindDirectionIcon(weatherData.getWindDirection()));
+                windSpeed.setText(String.format(WIND_SPEED_MPS, weatherData.getWindSpeed()));
+                windDirection.setText(String.format(WIND_DIRECTION_DEGREES, weatherData.getWindDirection()));
             }
         });
     }

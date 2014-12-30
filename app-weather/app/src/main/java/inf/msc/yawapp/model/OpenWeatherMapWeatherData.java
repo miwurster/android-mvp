@@ -80,4 +80,14 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     public boolean isDay() {
         return daylight;
     }
+
+    @Override
+    public float getWindDirection() {
+        return data.getWindObject().getWindDegree();
+    }
+
+    @Override
+    public float getWindSpeed() {
+        return data.getWindObject().getWindSpeed();
+    }
 }
