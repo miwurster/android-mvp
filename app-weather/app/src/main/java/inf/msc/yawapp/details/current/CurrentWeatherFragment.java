@@ -24,7 +24,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
     public static final String TEMPERATURE_CELCIUS = "%.1f °C";
     public static final String HUMIDITY_PERCENT = "%.0f %%";
     public static final String ATMOSPHERIC_PRESSURE_HPA = "%.0f hPa";
-    public static final String WIND_SPEED_MPS = "%.1f mps";
+    public static final String WIND_SPEED_MPS = "%.1f m/s";
     public static final String WIND_DIRECTION_DEGREES = "%.1f °";
     public static final String FONT_WEATHERICONS = "fonts/weathericons-regular-webfont.ttf";
 
