@@ -20,10 +20,11 @@ import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.model.WeatherData;
 
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
+
+    public static final String CONDITION_FORMAT = "%s, %s";
+
     @Inject
     WeatherDetailsPresenter presenter;
-
-    private Toolbar toolbar;
 
     private Map<WeatherData.Condition, String> conditionTexts;
 
@@ -68,7 +69,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         switch (item.getItemId()) {
             case R.id.action_search:
                 //startActivity(new Intent(this, SearchActivity.class));
-                presenter.search("Herrenberg");
+                presenter.search("Peking");
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -97,7 +98,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
                 TextView cityConditionWidget = (TextView) findViewById(R.id.city_condition);
                 String conditionText = conditionTexts.get(condition);
                 String daylightText = (isDay) ? getResources().getString(R.string.day) : getResources().getString(R.string.night);
-                cityConditionWidget.setText(String.format("%s, %s", conditionText, daylightText));
+                cityConditionWidget.setText(String.format(CONDITION_FORMAT, conditionText, daylightText));
             }
         });
     }

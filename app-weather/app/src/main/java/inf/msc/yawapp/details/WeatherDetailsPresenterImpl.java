@@ -3,7 +3,6 @@ package inf.msc.yawapp.details;
 import javax.inject.Inject;
 
 import inf.msc.yawapp.common.GenericObservable;
-import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;

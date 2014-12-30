@@ -13,19 +13,19 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     private Condition condition;
     private boolean daylight;
 
-    private final Map<String, Condition> conditionMap;
+    private static final Map<String, Condition> CONDITION_MAP;
 
-    {
-        conditionMap = new HashMap<>();
-        conditionMap.put("01", Condition.CLEAR);
-        conditionMap.put("02", Condition.FEW_CLOUDS);
-        conditionMap.put("03", Condition.SCATTERED_CLOUDS);
-        conditionMap.put("04", Condition.BROKEN_CLOUDS);
-        conditionMap.put("09", Condition.SHOWER_RAIN);
-        conditionMap.put("10", Condition.RAIN);
-        conditionMap.put("11", Condition.THUNDERSTORM);
-        conditionMap.put("13", Condition.SNOW);
-        conditionMap.put("50", Condition.MIST);
+    static {
+        CONDITION_MAP = new HashMap<>();
+        CONDITION_MAP.put("01", Condition.CLEAR);
+        CONDITION_MAP.put("02", Condition.FEW_CLOUDS);
+        CONDITION_MAP.put("03", Condition.SCATTERED_CLOUDS);
+        CONDITION_MAP.put("04", Condition.BROKEN_CLOUDS);
+        CONDITION_MAP.put("09", Condition.SHOWER_RAIN);
+        CONDITION_MAP.put("10", Condition.RAIN);
+        CONDITION_MAP.put("11", Condition.THUNDERSTORM);
+        CONDITION_MAP.put("13", Condition.SNOW);
+        CONDITION_MAP.put("50", Condition.MIST);
     }
 
     public OpenWeatherMapWeatherData(final CurrentWeatherData data) {
@@ -43,8 +43,8 @@ public class OpenWeatherMapWeatherData implements WeatherData {
             Pattern p = Pattern.compile("([0-9]{2})([dn])");
             Matcher m = p.matcher(icon);
             if (m.matches() && m.groupCount() > 0) {
-                if (conditionMap.containsKey(m.group(1))) {
-                    condition = conditionMap.get(m.group(1));
+                if (CONDITION_MAP.containsKey(m.group(1))) {
+                    condition = CONDITION_MAP.get(m.group(1));
                 }
                 daylight = m.group(2).equals("d");
             }

@@ -27,10 +27,9 @@ public class ModelModule {
         return new GenericObservable<WeatherData>();
     }
 
-
     @Provides
     @Singleton
-    public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData){
+    public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData) {
         return favouritesData;
     }
 

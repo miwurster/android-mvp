@@ -17,9 +17,9 @@
             android:background="?attr/colorPrimary"
             android:clipChildren="false"
             android:clipToPadding="false"
+            android:elevation="@dimen/elevation"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_vertical"
-            android:elevation="@dimen/elevation">
+            android:paddingBottom="@dimen/margin_vertical">
 
             <include
                 android:id="@+id/weatherSearchToolbar"
@@ -30,9 +30,9 @@
                 android:id="@+id/city_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal"
-                android:layout_marginEnd="@dimen/margin_horizontal"
                 android:layout_marginBottom="0dp"
+                android:layout_marginEnd="@dimen/margin_horizontal"
+                android:layout_marginStart="@dimen/margin_horizontal"
                 android:text=""
                 android:theme="@style/ActivityHeaderTitle" />
 
@@ -41,8 +41,8 @@
                 android:id="@+id/city_condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginEnd="@dimen/margin_horizontal"
+                android:layout_marginStart="@dimen/margin_horizontal"
                 android:text=""
                 android:theme="@style/ActivityHeaderSubTitle" />
 
@@ -52,9 +52,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/margin_vertical"
             android:layout_marginLeft="@dimen/margin_horizontal"
-            android:layout_marginRight="@dimen/margin_horizontal">
+            android:layout_marginRight="@dimen/margin_horizontal"
+            android:paddingTop="@dimen/margin_vertical">
 
             <fragment
                 android:id="@+id/current_weather_fragment"

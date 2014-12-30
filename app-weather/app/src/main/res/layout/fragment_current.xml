@@ -8,8 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_vertical">
+        android:layout_marginBottom="@dimen/margin_vertical"
+        android:orientation="vertical">
 
         <!-- Weather Condition Icon -->
         <TextView
@@ -81,8 +81,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_vertical">
+        android:layout_marginBottom="@dimen/margin_vertical"
+        android:orientation="vertical">
 
         <!-- Wind Direction Icon -->
         <TextView

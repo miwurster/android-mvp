@@ -1,6 +1,7 @@
 package inf.msc.yawapp.model;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import net.aksingh.java.api.owm.CurrentWeatherData;
 import net.aksingh.java.api.owm.OpenWeatherMap;
@@ -20,9 +21,10 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
                         listener.onWeatherDataAvailable(new OpenWeatherMapWeatherData(cwd));
                     }
                 } catch (Exception e) {
-                    // TODO: Log error
+                    Log.d("yawapp", "Failed to notify listener! Error was: " + e.getMessage());
                 }
             } catch (Exception e) {
+                Log.e("yawapp", "Failed to fetch weather data! Error was: " + e.getMessage());
                 if (listener != null) {
                     listener.onWeatherDataError();
                 }

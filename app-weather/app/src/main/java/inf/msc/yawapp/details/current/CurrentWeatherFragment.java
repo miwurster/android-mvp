@@ -26,6 +26,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
     public static final String ATMOSPHERIC_PRESSURE_HPA = "%.0f hPa";
     public static final String WIND_SPEED_MPS = "%.1f mps";
     public static final String WIND_DIRECTION_DEGREES = "%.1f °";
+    public static final String FONT_WEATHERICONS = "fonts/weathericons-regular-webfont.ttf";
 
     @Inject
     CurrentWeatherPresenter presenter;
@@ -86,7 +87,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         int d = Math.round(degrees) % 360;
         int delta = d % 45;
         d -= delta;
-        if (delta > 45/2) {
+        if (delta > 45 / 2) {
             d += 45;
         }
         return WIND_DIRECTIONS.get(d);
@@ -109,7 +110,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         windSpeed = (TextView) view.findViewById(R.id.wind_speed);
         windDirection = (TextView) view.findViewById(R.id.wind_direction);
 
-        Typeface weatherIconFont = Typeface.createFromAsset(getActivity().getApplication().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        Typeface weatherIconFont = Typeface.createFromAsset(getActivity().getApplication().getAssets(), FONT_WEATHERICONS);
         weatherIcon.setTypeface(weatherIconFont);
         windIcon.setTypeface(weatherIconFont);
 
