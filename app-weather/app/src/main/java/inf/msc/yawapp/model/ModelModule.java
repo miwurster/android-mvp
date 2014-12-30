@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import inf.msc.yawapp.common.GenericObservable;
+import inf.msc.yawapp.common.GenericCache;
 
 @Module(
         injects = {
@@ -23,8 +23,8 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public GenericObservable<WeatherData> provideWeatherDataObservable() {
-        return new GenericObservable<WeatherData>();
+    public GenericCache<WeatherData> provideWeatherDataCache() {
+        return new GenericCache<WeatherData>();
     }
 
     @Provides

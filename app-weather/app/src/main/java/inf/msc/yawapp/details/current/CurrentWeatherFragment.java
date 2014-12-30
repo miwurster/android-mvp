@@ -89,6 +89,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         d -= delta;
         if (delta > 45 / 2) {
             d += 45;
+            d %= 360;
         }
         return WIND_DIRECTIONS.get(d);
     }
@@ -115,6 +116,7 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         windIcon.setTypeface(weatherIconFont);
 
         presenter.register();
+        presenter.presentExistingData();
     }
 
     @Override

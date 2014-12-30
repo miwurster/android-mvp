@@ -2,7 +2,7 @@ package inf.msc.yawapp.details.current;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.MainApplication;
+import inf.msc.yawapp.common.GenericCache;
 import inf.msc.yawapp.common.GenericObservable;
 import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.WeatherData;
@@ -12,19 +12,23 @@ public class CurrentWeatherPresenterImpl implements CurrentWeatherPresenter, Gen
     CurrentWeatherView view;
 
     @Inject
-    MainApplication application;
-
-    @Inject
-    GenericObservable<WeatherData> weatherDataObservable;
+    GenericCache<WeatherData> weatherDataCache;
 
     @Override
     public void register() {
-        weatherDataObservable.registerObserver(this);
+        weatherDataCache.registerObserver(this);
     }
 
     @Override
     public void unregister() {
-        weatherDataObservable.unregisterObserver(this);
+        weatherDataCache.unregisterObserver(this);
+    }
+
+    @Override
+    public void presentExistingData() {
+        if (weatherDataCache.getData() != null) {
+            view.showWeatherData(weatherDataCache.getData());
+        }
     }
 
     @Override

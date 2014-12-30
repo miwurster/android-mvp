@@ -4,4 +4,6 @@ public interface CurrentWeatherPresenter {
     public void register();
 
     public void unregister();
+
+    public void presentExistingData();
 }

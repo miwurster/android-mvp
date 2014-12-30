@@ -2,7 +2,7 @@ package inf.msc.yawapp.details;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.common.GenericObservable;
+import inf.msc.yawapp.common.GenericCache;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
@@ -15,7 +15,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     WeatherSearchInteractor weatherSearchInteractor;
 
     @Inject
-    GenericObservable<WeatherData> weatherDataObservable;
+    GenericCache<WeatherData> weatherDataCache;
 
     @Override
     public void search(String query) {
@@ -24,7 +24,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
             public void onWeatherDataAvailable(WeatherData data) {
                 view.showCityName(data.getCityName());
                 view.showWeatherCondition(data.getCondition(), data.isDay());
-                weatherDataObservable.notifyAll(data);
+                weatherDataCache.notifyAll(data);
             }
 
             @Override
@@ -32,5 +32,14 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
                 view.showSearchError("FooBar");
             }
         });
+    }
+
+    @Override
+    public void presentExistingData() {
+        if (weatherDataCache.getData() != null) {
+            final WeatherData data = weatherDataCache.getData();
+            view.showCityName(data.getCityName());
+            view.showWeatherCondition(data.getCondition(), data.isDay());
+        }
     }
 }

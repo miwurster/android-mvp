@@ -55,6 +55,8 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
                 toolbar.setTitle("");
             }
         });
+
+        presenter.presentExistingData();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         switch (item.getItemId()) {
             case R.id.action_search:
                 //startActivity(new Intent(this, SearchActivity.class));
-                presenter.search("Peking");
+                presenter.search("Sidney");
                 return true;
         }
         return super.onOptionsItemSelected(item);
