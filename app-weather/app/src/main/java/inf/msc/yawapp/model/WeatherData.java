@@ -10,9 +10,9 @@ public interface WeatherData {
 
     public float getCurrentTemperature();
 
-    public float getMinTemperature();
+    public float getHumidity();
 
-    public float getMaxTemperature();
+    public float getAtmosphericPressure();
 
     public Condition getCondition();
 

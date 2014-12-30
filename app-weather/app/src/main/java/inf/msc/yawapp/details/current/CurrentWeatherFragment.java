@@ -22,6 +22,8 @@ import inf.msc.yawapp.model.WeatherData;
 public class CurrentWeatherFragment extends BaseModuleFragment implements CurrentWeatherView {
 
     public static final String TEMPERATURE_CELCIUS = "%.1f °C";
+    public static final String HUMIDITY_PERCENT = "%.0f %%";
+    public static final String ATMOSPHERIC_PRESSURE_HPA = "%.0f hPa";
     public static final String WIND_SPEED_MPS = "%.1f mps";
     public static final String WIND_DIRECTION_DEGREES = "%.1f °";
 
@@ -30,8 +32,8 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
 
     private TextView weatherIcon;
     private TextView temperatureBlock;
-    private TextView minTemperature;
-    private TextView maxTemperature;
+    private TextView humidity;
+    private TextView atmosphericPressure;
     private TextView windIcon;
     private TextView windSpeed;
     private TextView windDirection;
@@ -82,10 +84,10 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
 
     private static String getWindDirectionIcon(float degrees) {
         int d = Math.round(degrees) % 360;
-        int delta = d % 15;
+        int delta = d % 45;
         d -= delta;
-        if (delta > 7) {
-            d += 15;
+        if (delta > 45/2) {
+            d += 45;
         }
         return WIND_DIRECTIONS.get(d);
     }
@@ -101,8 +103,8 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
         super.onViewCreated(view, savedInstanceState);
         weatherIcon = (TextView) view.findViewById(R.id.weather_icon);
         temperatureBlock = (TextView) view.findViewById(R.id.temperature_block);
-        minTemperature = (TextView) view.findViewById(R.id.temperature_min);
-        maxTemperature = (TextView) view.findViewById(R.id.temperature_max);
+        humidity = (TextView) view.findViewById(R.id.humidity);
+        atmosphericPressure = (TextView) view.findViewById(R.id.atmospheric_pressure);
         windIcon = (TextView) view.findViewById(R.id.wind_icon);
         windSpeed = (TextView) view.findViewById(R.id.wind_speed);
         windDirection = (TextView) view.findViewById(R.id.wind_direction);
@@ -128,8 +130,8 @@ public class CurrentWeatherFragment extends BaseModuleFragment implements Curren
             public void run() {
                 // Temperature Block
                 temperatureBlock.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getCurrentTemperature()));
-                minTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMinTemperature()));
-                maxTemperature.setText(String.format(TEMPERATURE_CELCIUS, weatherData.getMaxTemperature()));
+                humidity.setText(String.format(HUMIDITY_PERCENT, weatherData.getHumidity()));
+                atmosphericPressure.setText(String.format(ATMOSPHERIC_PRESSURE_HPA, weatherData.getAtmosphericPressure()));
                 if (!weatherData.isDay()) {
                     weatherIcon.setText(CONDITIONS_NIGHT.get(weatherData.getCondition()));
                 } else {
