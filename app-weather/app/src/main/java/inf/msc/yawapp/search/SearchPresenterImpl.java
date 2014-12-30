@@ -2,6 +2,8 @@ package inf.msc.yawapp.search;
 
 import javax.inject.Inject;
 
+import inf.msc.yawapp.model.SubmitSearchInteractor;
+
 public class SearchPresenterImpl implements SearchPresenter {
     @Inject
     SearchView view;

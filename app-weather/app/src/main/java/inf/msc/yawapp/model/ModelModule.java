@@ -29,6 +29,12 @@ public class ModelModule {
 
     @Provides
     @Singleton
+    public SubmitSearchInteractor provideSubmitSearchInteractor(SubmitSearchInteractorImpl interactor) {
+        return interactor;
+    }
+
+    @Provides
+    @Singleton
     public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData) {
         return favouritesData;
     }

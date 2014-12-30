@@ -2,7 +2,6 @@ package inf.msc.yawapp.search;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.SearchView;
@@ -17,9 +16,8 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
-import inf.msc.yawapp.common.Intents;
 
-public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp.search.SearchView, SubmitSearchInteractor {
+public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp.search.SearchView {
 
     @Inject
     SearchPresenter presenter;
@@ -84,17 +82,5 @@ public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp
     @Override
     public void close() {
         finish();
-    }
-
-    @Override
-    public void submitSearch(String query) {
-        Intent intent = new Intent(Intents.SEARCH_WEATHER);
-        intent.putExtra("query", query);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        if (intent.resolveActivity(getPackageManager()) == null) {
-            startActivity(intent);
-        } else {
-            sendBroadcast(intent);
-        }
     }
 }
