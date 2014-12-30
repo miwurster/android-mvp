@@ -90,6 +90,11 @@ public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp
     public void submitSearch(String query) {
         Intent intent = new Intent(Intents.SEARCH_WEATHER);
         intent.putExtra("query", query);
-        startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            startActivity(intent);
+        } else {
+            sendBroadcast(intent);
+        }
     }
 }
