@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import inf.msc.yawapp.details.current.CurrentWeatherFragment;
 import inf.msc.yawapp.model.OpenWeatherMapInteractor;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
 

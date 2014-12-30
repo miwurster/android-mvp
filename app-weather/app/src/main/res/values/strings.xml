@@ -2,9 +2,24 @@
 <resources>
 
     <string name="app_name">Yet Another Weather App</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name_short">yaWapp</string>
 
-    <string name="btnSearch">Get Weather</string>
+    <string name="action_search">Search Cities</string>
+
+    <string name="weather_temperature_header">Temperature</string>
+    <string name="weather_temperature_min">Min:</string>
+    <string name="weather_temperature_max">Max:</string>
+
+    <string name="weather_condition_clear">Clear Sky</string>
+    <string name="weather_condition_few_clouds">Few Clouds</string>
+    <string name="weather_condition_scattered_clouds">Scattered Clouds</string>
+    <string name="weather_condition_broken_clouds">Broken Clouds</string>
+    <string name="weather_condition_shower_rain">Shower Rain</string>
+    <string name="weather_condition_rain">Rain</string>
+    <string name="weather_condition_thunderstorm">Thunderstorm</string>
+    <string name="weather_condition_snow">Snow</string>
+    <string name="weather_condition_mist">Mist</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
 
 </resources>

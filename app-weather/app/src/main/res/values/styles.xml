@@ -1,10 +1,16 @@
 <resources>
 
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryDark">#558B2F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+
     <style name="AppTheme" parent="AppTheme.Base" />
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

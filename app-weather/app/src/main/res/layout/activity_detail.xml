@@ -10,17 +10,64 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/weatherSearchToolbar"
-            layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/city_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:background="?attr/colorPrimary"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
+            <include
+                android:id="@+id/weatherSearchToolbar"
+                layout="@layout/toolbar_actionbar" />
+
+            <!-- City Name -->
+            <TextView
+                android:id="@+id/city_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:lineSpacingMultiplier="1.1"
+                android:maxLines="2"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Condition Text -->
+            <TextView
+                android:id="@+id/city_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:textAlignment="viewStart"
+                android:text="" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <fragment
+                android:id="@+id/current_weather_fragment"
+                class="inf.msc.yawapp.details.current.CurrentWeatherFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

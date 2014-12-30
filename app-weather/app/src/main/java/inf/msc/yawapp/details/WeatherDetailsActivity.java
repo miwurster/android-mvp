@@ -1,66 +1,77 @@
 package inf.msc.yawapp.details;
 
-import android.app.SearchManager;
-import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.BaseModuleActivity;
 import inf.msc.yawapp.R;
+import inf.msc.yawapp.common.BaseModuleActivity;
+import inf.msc.yawapp.model.WeatherData;
 
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
     @Inject
     WeatherDetailsPresenter presenter;
 
     private Toolbar toolbar;
-    private MenuItem searchItem;
+
+    private Map<WeatherData.Condition, String> conditionTexts;
+
+    private void initConditionTexts() {
+        Resources res = getResources();
+        conditionTexts = new HashMap<>();
+        conditionTexts.put(WeatherData.Condition.CLEAR, res.getString(R.string.weather_condition_clear));
+        conditionTexts.put(WeatherData.Condition.FEW_CLOUDS, res.getString(R.string.weather_condition_few_clouds));
+        conditionTexts.put(WeatherData.Condition.SCATTERED_CLOUDS, res.getString(R.string.weather_condition_scattered_clouds));
+        conditionTexts.put(WeatherData.Condition.BROKEN_CLOUDS, res.getString(R.string.weather_condition_broken_clouds));
+        conditionTexts.put(WeatherData.Condition.SHOWER_RAIN, res.getString(R.string.weather_condition_shower_rain));
+        conditionTexts.put(WeatherData.Condition.RAIN, res.getString(R.string.weather_condition_rain));
+        conditionTexts.put(WeatherData.Condition.THUNDERSTORM, res.getString(R.string.weather_condition_thunderstorm));
+        conditionTexts.put(WeatherData.Condition.SNOW, res.getString(R.string.weather_condition_snow));
+        conditionTexts.put(WeatherData.Condition.MIST, res.getString(R.string.weather_condition_mist));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        toolbar = getActionBarToolbar();
+        initConditionTexts();
+
+        final Toolbar toolbar = getActionBarToolbar();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                toolbar.setTitle("");
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-
-        getMenuInflater().inflate(R.menu.search, menu);
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        this.searchItem = searchItem;
-        if (searchItem != null) {
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            final SearchView view = (SearchView) searchItem.getActionView();
-            if (view != null) {
-                view.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-                view.setIconified(true);
-                view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        view.clearFocus();
-                        presenter.search(s);
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        // TODO: Lookup in city dictionary here
-                        return true;
-                    }
-                });
-            }
-        }
+        getMenuInflater().inflate(R.menu.details, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                //startActivity(new Intent(this, SearchActivity.class));
+                presenter.search("Rio");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -72,15 +83,23 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                toolbar.setTitle(city);
+                TextView cityName = (TextView) findViewById(R.id.city_name);
+                cityName.setText(city);
             }
         });
     }
 
     @Override
-    public void showCurrentTemperature(float temperature) {
-        TextView textWidget = (TextView) findViewById(R.id.textView);
-        textWidget.setText(Float.toString(temperature) + " °C");
+    public void showWeatherCondition(final WeatherData.Condition condition, final boolean isDay) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView cityConditionWidget = (TextView) findViewById(R.id.city_condition);
+                String conditionText = conditionTexts.get(condition);
+                String daylightText = (isDay) ? getResources().getString(R.string.day) : getResources().getString(R.string.night);
+                cityConditionWidget.setText(String.format("%s, %s", conditionText, daylightText));
+            }
+        });
     }
 
     @Override

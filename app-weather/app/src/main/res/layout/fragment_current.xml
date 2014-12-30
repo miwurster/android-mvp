@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Temperature Block -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/weather_icon"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="6dp"
+            android:gravity="left"
+            android:textSize="80dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="128dp"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/weather_temperature_header"/>
+
+            <TextView
+                android:id="@+id/temperature_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_column="0"
+                    android:text="@string/weather_temperature_min"
+                    android:layout_marginRight="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/temperature_min"
+                    android:layout_column="1"
+                    />
+
+                <TextView
+                    android:layout_column="0"
+                    android:text="@string/weather_temperature_max"
+                    android:layout_marginRight="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/temperature_max"
+                    android:layout_column="1"
+                    />
+            </GridLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
