@@ -22,9 +22,7 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/margin_vertical">
 
-            <include
-                android:id="@+id/weatherSearchToolbar"
-                layout="@layout/toolbar_actionbar" />
+            <include layout="@layout/toolbar_actionbar" />
 
             <!-- City Name -->
             <TextView

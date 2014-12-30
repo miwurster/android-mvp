@@ -21,7 +21,19 @@ public class SearchModule {
 
     @Provides
     @Singleton
-    public SearchActivity provideSearchActivity() {
+    public SearchView provideSearchView() {
         return view;
+    }
+
+    @Provides
+    @Singleton
+    public SubmitSearchInteractor provideSubmitSearchInteractor() {
+        return view;
+    }
+
+    @Provides
+    @Singleton
+    public SearchPresenter provideSearchPresenter(SearchPresenterImpl presenter) {
+        return presenter;
     }
 }

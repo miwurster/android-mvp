@@ -29,7 +29,7 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
 
     protected Toolbar getActionBarToolbar() {
         if (actionBarToolbar == null) {
-            actionBarToolbar = (Toolbar) findViewById(R.id.weatherSearchToolbar);
+            actionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
             if (actionBarToolbar != null) {
                 setSupportActionBar(actionBarToolbar);
             }

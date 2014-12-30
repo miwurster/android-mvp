@@ -1,5 +1,6 @@
 package inf.msc.yawapp.details;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +18,9 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
+import inf.msc.yawapp.common.Intents;
 import inf.msc.yawapp.model.WeatherData;
+import inf.msc.yawapp.search.SearchActivity;
 
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
 
@@ -56,7 +59,12 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
             }
         });
 
-        presenter.presentExistingData();
+        Intent intent = getIntent();
+        if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
+            presenter.search(intent.getExtras().getString("query"));
+        } else {
+            presenter.presentExistingData();
+        }
     }
 
     @Override
@@ -70,8 +78,8 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                //startActivity(new Intent(this, SearchActivity.class));
-                presenter.search("Sidney");
+                startActivity(new Intent(this, SearchActivity.class));
+                //presenter.search("Sidney");
                 return true;
         }
         return super.onOptionsItemSelected(item);
