@@ -26,4 +26,12 @@
     <string name="day">Day</string>
     <string name="night">Night</string>
 
+    <string name="placeholder_weather_icon">&#xf084;</string>
+    <string name="placeholder_wind_icon">&#xf050;</string>
+    <string name="placeholder_temperature">0 °C</string>
+    <string name="placeholder_humidity">0 %</string>
+    <string name="placeholder_pressure">0 hPa</string>
+    <string name="placeholder_wind_speed">0 mps</string>
+    <string name="placeholder_wind_direction">0 °</string>
+
 </resources>

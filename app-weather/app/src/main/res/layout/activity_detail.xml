@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -50,6 +51,7 @@
 
         <!-- Content -->
         <ScrollView
+            android:id="@+id/content_area"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margin_horizontal"
@@ -60,7 +62,9 @@
                 android:id="@+id/current_weather_fragment"
                 class="inf.msc.yawapp.details.current.CurrentWeatherFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_current" />
+
         </ScrollView>
 
     </LinearLayout>

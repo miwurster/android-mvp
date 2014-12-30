@@ -20,6 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/margin_vertical_tiny"
             android:gravity="start"
+            android:text="@string/placeholder_weather_icon"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="72dp" />
 
@@ -44,6 +45,7 @@
                 android:id="@+id/temperature_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/placeholder_temperature"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <GridLayout
@@ -60,7 +62,8 @@
                 <!-- Humidity -->
                 <TextView
                     android:id="@+id/humidity"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="@string/placeholder_humidity" />
 
                 <TextView
                     android:layout_column="0"
@@ -70,7 +73,8 @@
                 <!-- Atmospheric Pressure -->
                 <TextView
                     android:id="@+id/atmospheric_pressure"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="@string/placeholder_pressure" />
             </GridLayout>
 
         </LinearLayout>
@@ -93,6 +97,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/margin_vertical_tiny"
             android:gravity="start"
+            android:text="@string/placeholder_wind_icon"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="72dp" />
 
@@ -125,7 +130,8 @@
                 <!-- Wind Speed-->
                 <TextView
                     android:id="@+id/wind_speed"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="@string/placeholder_wind_speed" />
 
                 <TextView
                     android:layout_column="0"
@@ -135,7 +141,8 @@
                 <!-- Wind Direction -->
                 <TextView
                     android:id="@+id/wind_direction"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="@string/placeholder_wind_direction" />
             </GridLayout>
 
         </LinearLayout>

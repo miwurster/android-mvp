@@ -8,5 +8,4 @@ public interface WeatherDetailsView {
     public void showCityName(final String city);
 
     public void showWeatherCondition(final WeatherData.Condition condition, boolean isDay);
-
 }

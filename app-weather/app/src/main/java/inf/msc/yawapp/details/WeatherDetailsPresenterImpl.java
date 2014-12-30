@@ -22,9 +22,9 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
         weatherSearchInteractor.search(query, new WeatherDataListener() {
             @Override
             public void onWeatherDataAvailable(WeatherData data) {
+                weatherDataCache.notifyAll(data);
                 view.showCityName(data.getCityName());
                 view.showWeatherCondition(data.getCondition(), data.isDay());
-                weatherDataCache.notifyAll(data);
             }
 
             @Override
