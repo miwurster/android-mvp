@@ -41,14 +41,13 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
     //SQL Commands
     public static final String CREATE = "CREATE TABLE "
             +FAV_TABLE+" ("
-            +ID+" INT PRIMARY KEY AUTOINCREMENT, "
+            +ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             +LONGITUDE+" VARCHAR(255), "
             +LATITUDE+" VARCHAR(255), "
             +COUNTRY+" VARCHAR(255), "
             +ZIP+" VARCHAR(255), "
             +CITY+" VARCHAR(255), "
-            +ADDRESS+" VARCHAR(255), "
-            +"PRIMARY KEY ("+ID+"))";
+            +ADDRESS+" VARCHAR(255))";
     public static final String DROP = "DROP TABLE IF EXISTS "+ FAV_TABLE;
 
 
