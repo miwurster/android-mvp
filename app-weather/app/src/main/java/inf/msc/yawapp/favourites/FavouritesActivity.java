@@ -1,20 +1,14 @@
 package inf.msc.yawapp.favourites;
 
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -22,9 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.BaseModuleActivity;
 import inf.msc.yawapp.R;
-import inf.msc.yawapp.details.WeatherDetailsModule;
+import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.model.Location;
 
 /**
@@ -44,10 +37,7 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
         setContentView(R.layout.activity_favourites);
         toolbar = getActionBarToolbar();
 
-
-
         presenter.update();
-
     }
 
     @Override
@@ -98,9 +88,9 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
     @Override
     public void addFavourites(List<Location> items) {
         LinearLayout list = (LinearLayout) findViewById(R.id.favList);
-        for(int i = 0; i < items.size(); i++){
+        for (int i = 0; i < items.size(); i++) {
 
-            View convertView = getLayoutInflater().inflate(R.layout.item_favourites,list,false);
+            View convertView = getLayoutInflater().inflate(R.layout.item_favourites, list, false);
 
 
             //RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.favItem);
@@ -109,7 +99,7 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
             city.setText(items.get(i).getCity());
 
             TextView misc = (TextView) convertView.findViewById(R.id.misc);
-            misc.setText(items.get(i).getCountry()+ " " +items.get(i).getZip()+"  "+items.get(i).getAddress());
+            misc.setText(items.get(i).getCountry() + " " + items.get(i).getZip() + "  " + items.get(i).getAddress());
 
             list.addView(convertView);
         }

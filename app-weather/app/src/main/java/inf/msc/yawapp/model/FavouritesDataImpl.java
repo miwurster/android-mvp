@@ -10,6 +10,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import inf.msc.yawapp.MainApplication;
+
 /**
  * Created by Sebastian on 29.12.2014.
  */
@@ -52,7 +56,8 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
      * Constructor
      * @param context
      */
-    public FavouritesDataImpl (Context context){
+    @Inject
+    public FavouritesDataImpl (MainApplication context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

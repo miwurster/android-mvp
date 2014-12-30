@@ -10,6 +10,7 @@ import inf.msc.yawapp.common.GenericObservable;
         injects = {
                 WeatherSearchInteractor.class
         },
+        complete = false,
         library = true
 )
 public class ModelModule {
@@ -29,8 +30,8 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public FavouritesData provideFavouritesData(){
-        return new FavouritesDataImpl(main);
+    public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData){
+        return favouritesData;
     }
 
 }

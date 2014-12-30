@@ -12,7 +12,7 @@ android:layout_height="match_parent">
 
     <include
         android:id="@+id/weatherSearchToolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar_actionbar" />
 
     <ScrollView
         android:layout_width="fill_parent"
