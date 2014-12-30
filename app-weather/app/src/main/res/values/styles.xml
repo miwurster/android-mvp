@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#558B2F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorPrimaryTextInverse">#8aFFFFFF</color>
 
     <style name="AppTheme" parent="AppTheme.Base" />
 
@@ -11,6 +12,36 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
+
+    <style name="ActivityHeader">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ActivityHeaderTitle">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ActivityHeaderSubTitle">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/colorPrimaryTextInverse</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SectionHeader">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingBottom">@dimen/margin_vertical_small</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 
 </resources>

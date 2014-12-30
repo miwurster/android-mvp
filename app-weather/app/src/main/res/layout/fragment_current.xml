@@ -10,51 +10,54 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Weather Condition Icon -->
         <TextView
             android:id="@+id/weather_icon"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="@dimen/keyline3"
+            android:layout_height="@dimen/keyline3"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="6dp"
-            android:gravity="left"
-            android:textSize="80dp" />
+            android:layout_marginTop="@dimen/margin_vertical_tiny"
+            android:gravity="start"
+            android:textSize="72dp"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="128dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="@dimen/keyline3"
+            android:layout_marginTop="@dimen/margin_vertical_tiny"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:theme="@style/SectionHeader"
                 android:text="@string/weather_temperature_header"/>
 
+            <!-- Temperature -->
             <TextView
                 android:id="@+id/temperature_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/margin_vertical">
 
                 <TextView
                     android:layout_column="0"
                     android:text="@string/weather_temperature_min"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="@dimen/margin_horizontal"
                     />
 
+                <!-- Temperature Min -->
                 <TextView
                     android:id="@+id/temperature_min"
                     android:layout_column="1"
@@ -63,9 +66,10 @@
                 <TextView
                     android:layout_column="0"
                     android:text="@string/weather_temperature_max"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="@dimen/margin_horizontal"
                     />
 
+                <!-- Temperature Max -->
                 <TextView
                     android:id="@+id/temperature_max"
                     android:layout_column="1"

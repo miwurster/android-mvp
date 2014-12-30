@@ -10,16 +10,16 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-
+        <!-- Header Block -->
         <LinearLayout
-            android:id="@+id/city_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:paddingBottom="16dp">
+            android:paddingBottom="@dimen/margin_vertical"
+            android:elevation="@dimen/elevation">
 
             <include
                 android:id="@+id/weatherSearchToolbar"
@@ -30,37 +30,31 @@
                 android:id="@+id/city_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginEnd="@dimen/margin_horizontal"
                 android:layout_marginBottom="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif"
-                android:lineSpacingMultiplier="1.1"
-                android:maxLines="2"
                 android:text=""
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:theme="@style/ActivityHeaderTitle" />
 
             <!-- Condition Text -->
             <TextView
                 android:id="@+id/city_condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:ellipsize="end"
-                android:textAlignment="viewStart"
-                android:text="" />
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginEnd="@dimen/margin_horizontal"
+                android:text=""
+                android:theme="@style/ActivityHeaderSubTitle" />
 
         </LinearLayout>
 
+        <!-- Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:paddingTop="@dimen/margin_vertical"
+            android:layout_marginLeft="@dimen/margin_horizontal"
+            android:layout_marginRight="@dimen/margin_horizontal">
 
             <fragment
                 android:id="@+id/current_weather_fragment"
