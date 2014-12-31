@@ -8,6 +8,10 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +26,29 @@ public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp
     @Inject
     SearchPresenter presenter;
 
+    private ArrayAdapter<String> suggestionsListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        ListView suggestionsList = (ListView) findViewById(R.id.suggestions_container);
+        suggestionsListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        suggestionsList.setAdapter(suggestionsListAdapter);
+
+        suggestionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        presenter.submitSearch(item);
+                    }
+                });
+            }
+        });
 
         final Toolbar toolbar = getActionBarToolbar();
         new Handler().post(new Runnable() {
@@ -82,5 +105,16 @@ public class SearchActivity extends BaseModuleActivity implements inf.msc.yawapp
     @Override
     public void close() {
         finish();
+    }
+
+    @Override
+    public void clearSuggestions() {
+        suggestionsListAdapter.clear();
+    }
+
+    @Override
+    public void showSuggestions(List<String> suggestions) {
+        suggestionsListAdapter.clear();
+        suggestionsListAdapter.addAll(suggestions);
     }
 }

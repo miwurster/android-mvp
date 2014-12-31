@@ -39,4 +39,9 @@ public class ModelModule {
         return favouritesStore;
     }
 
+    @Provides
+    @Singleton
+    public SearchSuggestions provideSearchSuggestions(CitySearchSuggestions searchSuggestions) {
+        return searchSuggestions;
+    }
 }

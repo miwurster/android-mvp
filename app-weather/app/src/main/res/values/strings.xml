@@ -8,6 +8,7 @@
     <string name="activity_header_search">Search</string>
 
     <string name="action_search">Search Cities</string>
+    <string name="action_refresh">Refresh</string>
 
     <string name="weather_temperature_header">Temperature</string>
     <string name="weather_humidity">Humidity:</string>
