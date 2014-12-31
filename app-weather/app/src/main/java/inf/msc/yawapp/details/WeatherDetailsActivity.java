@@ -25,6 +25,13 @@ import inf.msc.yawapp.search.SearchActivity;
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
 
     public static final String CONDITION_FORMAT = "%s, %s";
+    public static final String BUNDLE_VIEW_STATE = "viewState";
+
+    private enum ViewState {
+        UNINITIALIZED, INITIALIZED
+    }
+
+    private ViewState viewState = ViewState.UNINITIALIZED;
 
     @Inject
     WeatherDetailsPresenter presenter;
@@ -48,6 +55,10 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            viewState = (ViewState) savedInstanceState.getSerializable(BUNDLE_VIEW_STATE);
+        }
+
         setContentView(R.layout.activity_detail);
         initConditionTexts();
 
@@ -59,12 +70,18 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
             }
         });
 
-        presenter.presentExistingData();
-
-        Intent intent = getIntent();
-        if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
-            presenter.search(intent.getExtras().getString("query"));
+        if (viewState == ViewState.UNINITIALIZED) {
+            onNewIntent(getIntent());
+            viewState = ViewState.INITIALIZED;
+        } else {
+            presenter.presentExistingData();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(BUNDLE_VIEW_STATE, viewState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

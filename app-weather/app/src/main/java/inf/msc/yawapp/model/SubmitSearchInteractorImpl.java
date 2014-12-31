@@ -18,10 +18,5 @@ public class SubmitSearchInteractorImpl implements SubmitSearchInteractor {
         intent.putExtra("query", query);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         application.startActivity(intent);
-//        if (intent.resolveActivity(application.getPackageManager()) == null) {
-//
-//        } else {
-//            application.sendBroadcast(intent);
-//        }
     }
 }
