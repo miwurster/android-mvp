@@ -16,11 +16,12 @@ public class SubmitSearchInteractorImpl implements SubmitSearchInteractor {
     public void submitSearch(String query) {
         Intent intent = new Intent(Intents.SEARCH_WEATHER);
         intent.putExtra("query", query);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        if (intent.resolveActivity(application.getPackageManager()) == null) {
-            application.startActivity(intent);
-        } else {
-            application.sendBroadcast(intent);
-        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        application.startActivity(intent);
+//        if (intent.resolveActivity(application.getPackageManager()) == null) {
+//
+//        } else {
+//            application.sendBroadcast(intent);
+//        }
     }
 }

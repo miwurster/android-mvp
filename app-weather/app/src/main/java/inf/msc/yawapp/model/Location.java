@@ -1,10 +1,6 @@
 package inf.msc.yawapp.model;
 
-/**
- * Created by Sebastian on 28.12.2014.
- */
 public class Location {
-
     private long id;
 
     private String longitude;
@@ -15,9 +11,7 @@ public class Location {
     private String city;
     private String address;
 
-
     public long getId() {
-
         return id;
     }
 
@@ -26,7 +20,7 @@ public class Location {
     }
 
     public String getLongitude() {
-        if(longitude == null){
+        if (longitude == null) {
             return "";
         }
         return longitude;
@@ -37,7 +31,7 @@ public class Location {
     }
 
     public String getLatitude() {
-        if(latitude == null){
+        if (latitude == null) {
             return "";
         }
         return latitude;
@@ -48,7 +42,7 @@ public class Location {
     }
 
     public String getCountry() {
-        if(country == null){
+        if (country == null) {
             return "";
         }
         return country;
@@ -59,7 +53,7 @@ public class Location {
     }
 
     public String getZip() {
-        if(zip == null){
+        if (zip == null) {
             return "";
         }
         return zip;
@@ -70,7 +64,7 @@ public class Location {
     }
 
     public String getCity() {
-        if(city == null){
+        if (city == null) {
             return "";
         }
         return city;
@@ -81,7 +75,7 @@ public class Location {
     }
 
     public String getAddress() {
-        if(address == null){
+        if (address == null) {
             return "";
         }
         return address;
