@@ -8,6 +8,8 @@ public interface WeatherData {
 
     public String getCityName();
 
+    public String getCountry();
+
     public float getCurrentTemperature();
 
     public float getHumidity();

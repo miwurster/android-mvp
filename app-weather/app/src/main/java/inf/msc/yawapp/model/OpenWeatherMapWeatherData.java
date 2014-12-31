@@ -57,6 +57,11 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     }
 
     @Override
+    public String getCountry() {
+        return data.getSysDataObject().getCountryCode();
+    }
+
+    @Override
     public float getCurrentTemperature() {
         return data.getMainObject().getTemperature();
     }

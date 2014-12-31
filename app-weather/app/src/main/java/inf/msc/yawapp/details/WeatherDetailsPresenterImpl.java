@@ -17,14 +17,22 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     @Inject
     GenericCache<WeatherData> weatherDataCache;
 
+    private void presentData(final WeatherData data) {
+        if (data.getCityName().isEmpty()) {
+            view.showCityName(data.getCountry());
+        } else {
+            view.showCityName(data.getCityName());
+        }
+        view.showWeatherCondition(data.getCondition(), data.isDay());
+    }
+
     @Override
     public void search(String query) {
         weatherSearchInteractor.search(query, new WeatherDataListener() {
             @Override
             public void onWeatherDataAvailable(WeatherData data) {
                 weatherDataCache.notifyAll(data);
-                view.showCityName(data.getCityName());
-                view.showWeatherCondition(data.getCondition(), data.isDay());
+                presentData(data);
             }
 
             @Override
@@ -38,8 +46,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     public void presentExistingData() {
         if (weatherDataCache.getData() != null) {
             final WeatherData data = weatherDataCache.getData();
-            view.showCityName(data.getCityName());
-            view.showWeatherCondition(data.getCondition(), data.isDay());
+            presentData(data);
         }
     }
 }
