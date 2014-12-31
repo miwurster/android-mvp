@@ -92,6 +92,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
             presenter.search(intent.getExtras().getString("query"));
         }
