@@ -106,6 +106,9 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
             case R.id.action_search:
                 startActivity(new Intent(this, SearchActivity.class));
                 return true;
+            case R.id.action_refresh:
+                presenter.refresh();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

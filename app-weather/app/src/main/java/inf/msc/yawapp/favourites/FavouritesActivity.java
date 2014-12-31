@@ -35,7 +35,7 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.details, menu);
+        getMenuInflater().inflate(R.menu.favourites, menu);
         return true;
     }
 

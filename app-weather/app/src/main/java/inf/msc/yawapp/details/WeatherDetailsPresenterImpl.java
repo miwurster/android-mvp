@@ -43,6 +43,17 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     }
 
     @Override
+    public void refresh() {
+        if (weatherDataCache.getData() != null) {
+            String query = weatherDataCache.getData().getCityName();
+            if (query.isEmpty()) {
+                query = weatherDataCache.getData().getCountry();
+            }
+            search(query);
+        }
+    }
+
+    @Override
     public void presentExistingData() {
         if (weatherDataCache.getData() != null) {
             final WeatherData data = weatherDataCache.getData();
