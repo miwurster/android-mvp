@@ -90,6 +90,14 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
+            presenter.search(intent.getExtras().getString("query"));
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.details, menu);
@@ -101,7 +109,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         switch (item.getItemId()) {
             case R.id.action_search:
                 startActivity(new Intent(this, SearchActivity.class));
-                //presenter.search("Sidney");
                 return true;
         }
         return super.onOptionsItemSelected(item);

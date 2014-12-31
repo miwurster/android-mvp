@@ -19,11 +19,8 @@
 
         <activity
             android:name=".details.WeatherDetailsActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="yawapp.common.Intents.SEARCH_WEATHER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -32,9 +29,16 @@
 
         <activity
             android:name=".favourites.FavouritesActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/activity_header_favourites">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <activity android:name=".search.SearchActivity">
+        <activity
+            android:name=".search.SearchActivity"
+            android:label="@string/activity_header_search">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -43,10 +47,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-        <!--<provider-->
-        <!--android:name=".search.SearchHistoryProvider"-->
-        <!--android:authorities="inf.msc.yawapp.search.SearchHistoryProvider" />-->
 
     </application>
 
