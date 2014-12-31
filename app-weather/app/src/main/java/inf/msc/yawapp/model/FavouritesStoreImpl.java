@@ -13,9 +13,9 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.MainApplication;
 
-public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesData {
+public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesStore {
 
-    private static final String TAG = FavouritesDataImpl.class.getSimpleName();
+    private static final String TAG = FavouritesStoreImpl.class.getSimpleName();
 
     // basic settings for database
     private static final String DATABASE_NAME = "favourites.db";
@@ -46,7 +46,7 @@ public class FavouritesDataImpl extends SQLiteOpenHelper implements FavouritesDa
     public static final String DROP = "DROP TABLE IF EXISTS " + FAV_TABLE;
 
     @Inject
-    public FavouritesDataImpl(MainApplication context) {
+    public FavouritesStoreImpl(MainApplication context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

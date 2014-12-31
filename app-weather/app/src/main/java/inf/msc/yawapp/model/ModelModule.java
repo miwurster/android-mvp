@@ -35,8 +35,8 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public FavouritesData provideFavouritesData(FavouritesDataImpl favouritesData) {
-        return favouritesData;
+    public FavouritesStore provideFavouritesStore(FavouritesStoreImpl favouritesStore) {
+        return favouritesStore;
     }
 
 }

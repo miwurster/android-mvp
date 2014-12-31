@@ -2,7 +2,7 @@ package inf.msc.yawapp.favourites;
 
 import javax.inject.Inject;
 
-import inf.msc.yawapp.model.FavouritesData;
+import inf.msc.yawapp.model.FavouritesStore;
 
 public class FavouritesPresenterImpl implements FavouritesPresenter {
 
@@ -10,7 +10,7 @@ public class FavouritesPresenterImpl implements FavouritesPresenter {
     FavouritesView view;
 
     @Inject
-    FavouritesData model;
+    FavouritesStore model;
 
     @Override
     public void update() {

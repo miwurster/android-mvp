@@ -2,7 +2,7 @@ package inf.msc.yawapp.model;
 
 import java.util.List;
 
-public interface FavouritesData {
+public interface FavouritesStore {
 
     public void add(Location loc);
 
