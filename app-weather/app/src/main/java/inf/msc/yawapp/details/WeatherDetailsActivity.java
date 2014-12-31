@@ -1,9 +1,6 @@
 package inf.msc.yawapp.details;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,15 +31,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     private Map<WeatherData.Condition, String> conditionTexts;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
-                presenter.search(intent.getExtras().getString("query"));
-            }
-        }
-    };
-
     private void initConditionTexts() {
         Resources res = getResources();
         conditionTexts = new HashMap<>();
@@ -71,22 +59,12 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
             }
         });
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intents.SEARCH_WEATHER);
-        registerReceiver(receiver, filter);
-
         presenter.presentExistingData();
 
         Intent intent = getIntent();
         if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
             presenter.search(intent.getExtras().getString("query"));
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        unregisterReceiver(receiver);
-        super.onDestroy();
     }
 
     @Override
