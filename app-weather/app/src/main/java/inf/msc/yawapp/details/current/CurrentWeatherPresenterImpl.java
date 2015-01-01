@@ -33,6 +33,8 @@ public class CurrentWeatherPresenterImpl implements CurrentWeatherPresenter, Gen
 
     @Override
     public void update(GenericObservable<WeatherData> observable, WeatherData argument) {
-        view.showWeatherData(argument);
+        if (argument != null) {
+            view.showWeatherData(argument);
+        }
     }
 }

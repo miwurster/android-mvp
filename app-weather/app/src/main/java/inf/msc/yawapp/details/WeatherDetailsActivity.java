@@ -27,16 +27,10 @@ import inf.msc.yawapp.search.SearchActivity;
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
 
     public static final String CONDITION_FORMAT = "%s, %s";
-    public static final String BUNDLE_VIEW_STATE = "viewState";
-
-    private enum ViewState {
-        UNINITIALIZED, LOADING, WEATHER, ERROR
-    }
 
     @Inject
     WeatherDetailsPresenter presenter;
 
-    private ViewState viewState = ViewState.UNINITIALIZED;
     private Map<WeatherData.Condition, String> conditionTexts;
 
     private TextView widgetCityName;
@@ -63,9 +57,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            viewState = (ViewState) savedInstanceState.getSerializable(BUNDLE_VIEW_STATE);
-        }
 
         setContentView(R.layout.activity_detail);
         initConditionTexts();
@@ -85,28 +76,17 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
             }
         });
 
-        if (viewState == ViewState.UNINITIALIZED) {
+        presenter.restore(savedInstanceState);
+        if (!presenter.isInitialized()) {
             onNewIntent(getIntent());
-            viewState = ViewState.LOADING;
         } else {
             presenter.presentExistingData();
-            switch (viewState) {
-                case LOADING:
-                    showLoadingAnimation();
-                    break;
-                case WEATHER:
-                    showWeatherContent();
-                    break;
-                case ERROR:
-                    showSearchError();
-                    break;
-            }
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(BUNDLE_VIEW_STATE, viewState);
+        presenter.backup(outState);
         super.onSaveInstanceState(outState);
     }
 
@@ -141,7 +121,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     @Override
     public void showLoadingAnimation() {
-        viewState = ViewState.LOADING;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -155,7 +134,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     @Override
     public void showWeatherContent() {
-        viewState = ViewState.WEATHER;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -167,7 +145,6 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     @Override
     public void showSearchError() {
-        viewState = ViewState.ERROR;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
