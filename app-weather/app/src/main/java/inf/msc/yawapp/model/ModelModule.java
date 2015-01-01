@@ -7,9 +7,6 @@ import dagger.Provides;
 import inf.msc.yawapp.common.GenericCache;
 
 @Module(
-        injects = {
-                WeatherSearchInteractor.class
-        },
         complete = false,
         library = true
 )
@@ -17,8 +14,8 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public WeatherSearchInteractor provideWeatherSearchInteractor() {
-        return new OpenWeatherMapInteractor();
+    public WeatherSearchInteractor provideWeatherSearchInteractor(OpenWeatherMapInteractor interactor) {
+        return interactor;
     }
 
     @Provides

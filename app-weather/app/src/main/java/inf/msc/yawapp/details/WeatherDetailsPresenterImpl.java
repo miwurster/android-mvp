@@ -39,7 +39,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
 
             @Override
             public void onWeatherDataError() {
-                view.showSearchError("FooBar");  // TODO Show error here
+                view.showSearchError();
             }
         });
     }

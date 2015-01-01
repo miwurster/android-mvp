@@ -7,7 +7,7 @@ public interface WeatherDetailsView {
 
     public void showWeatherContent();
 
-    public void showSearchError(final String message);
+    public void showSearchError();
 
     public void showCityName(final String city);
 

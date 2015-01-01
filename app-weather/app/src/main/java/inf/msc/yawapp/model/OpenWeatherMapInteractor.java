@@ -4,10 +4,15 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import net.aksingh.java.api.owm.CurrentWeatherData;
-import net.aksingh.java.api.owm.OpenWeatherMap;
+
+import javax.inject.Inject;
+
+import inf.msc.yawapp.owm.OpenWeatherMapAdapter;
 
 public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
-    private final OpenWeatherMap owm = new OpenWeatherMap(OpenWeatherMap.OWM_URL.PARAMETER_UNITS_VALUE_METRIC, "");
+
+    @Inject
+    OpenWeatherMapAdapter openWeatherMapAdapter;
 
     private class GetWeatherTask extends AsyncTask<String, Void, String> {
         private WeatherDataListener listener;
@@ -15,7 +20,7 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
         @Override
         protected String doInBackground(String... params) {
             try {
-                CurrentWeatherData cwd = owm.currentWeatherByCityName(params[0]);
+                CurrentWeatherData cwd = openWeatherMapAdapter.currentWeatherByCityName(params[0]);
                 try {
                     if (listener != null) {
                         listener.onWeatherDataAvailable(new OpenWeatherMapWeatherData(cwd));
