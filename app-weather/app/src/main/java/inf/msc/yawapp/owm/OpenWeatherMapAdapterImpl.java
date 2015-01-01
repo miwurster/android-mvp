@@ -19,18 +19,12 @@ public class OpenWeatherMapAdapterImpl implements OpenWeatherMapAdapter {
         response = new OpenWeatherMap.OWM_Response(unit, apiKey);
     }
 
-    @Override
-    public CurrentWeatherData currentWeatherByCityName(final String cityName) throws OpenWeatherMapException {
-        CurrentWeatherData cwd;
-        String jsonResponseString;
-        JSONObject jsonResponseObject;
-
+    private CurrentWeatherData handleResponse(final String responseString) throws OpenWeatherMapException {
         try {
-            jsonResponseString = response.currentWeatherByCityName(cityName);
-            if (jsonResponseString == null) {
+            if (responseString == null) {
                 throw new OpenWeatherMapException();
             }
-            jsonResponseObject = new JSONObject(jsonResponseString);
+            JSONObject jsonResponseObject = new JSONObject(responseString);
             if (!jsonResponseObject.has(JSON_COD) || jsonResponseObject.getInt(JSON_COD) != ERRC_SUCCESS) {
                 if (jsonResponseObject.has(JSON_MESSAGE)) {
                     throw new OpenWeatherMapException(jsonResponseObject.getString(JSON_MESSAGE));
@@ -38,12 +32,30 @@ public class OpenWeatherMapAdapterImpl implements OpenWeatherMapAdapter {
                     throw new OpenWeatherMapException();
                 }
             }
-            cwd = new CurrentWeatherData(jsonResponseObject);
-        } catch (JSONException | IOException e) {
+            return new CurrentWeatherData(jsonResponseObject);
+        } catch (JSONException e) {
             throw new OpenWeatherMapException(e);
         }
+    }
 
-        return cwd;
+    @Override
+    public CurrentWeatherData currentWeatherByCityName(final String cityName) throws OpenWeatherMapException {
+        try {
+            String jsonResponseString = response.currentWeatherByCityName(cityName);
+            return handleResponse(jsonResponseString);
+        } catch (IOException e) {
+            throw new OpenWeatherMapException(e);
+        }
+    }
+
+    @Override
+    public CurrentWeatherData currentWeatherByCityCode(long cityCode) throws OpenWeatherMapException {
+        try {
+            String jsonResponseString = response.currentWeatherByCityCode(cityCode);
+            return handleResponse(jsonResponseString);
+        } catch (IOException e) {
+            throw new OpenWeatherMapException(e);
+        }
     }
 }
 

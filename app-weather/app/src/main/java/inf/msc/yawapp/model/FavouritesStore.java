@@ -4,16 +4,14 @@ import java.util.List;
 
 public interface FavouritesStore {
 
-    public void add(Location loc);
+    public void add(Location location);
 
-    public void update(Location loc);
+    public void update(Location location);
 
-    public void delete(long id);
+    public void delete(Location location);
 
-    public Location get(long id);
+    public Location getById(long id);
 
     public List<Location> getAll();
-
-    public List<Location> search(String query);
 
 }

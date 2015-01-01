@@ -6,9 +6,7 @@ public interface WeatherData {
         SHOWER_RAIN, RAIN, THUNDERSTORM, SNOW, MIST
     }
 
-    public String getCityName();
-
-    public String getCountry();
+    public Location getLocation();
 
     public float getCurrentTemperature();
 

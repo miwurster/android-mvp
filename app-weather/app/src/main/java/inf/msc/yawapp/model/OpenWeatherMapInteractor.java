@@ -14,22 +14,54 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
     @Inject
     OpenWeatherMapAdapter openWeatherMapAdapter;
 
-    private class GetWeatherTask extends AsyncTask<String, Void, String> {
+    private static final String TAG = OpenWeatherMapInteractor.class.getSimpleName();
+
+    private class GetWeatherTask extends AsyncTask<String, Void, Void> {
         private WeatherDataListener listener;
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Void doInBackground(String... params) {
             try {
                 CurrentWeatherData cwd = openWeatherMapAdapter.currentWeatherByCityName(params[0]);
+                OpenWeatherMapWeatherData data = new OpenWeatherMapWeatherData(cwd);
                 try {
                     if (listener != null) {
-                        listener.onWeatherDataAvailable(new OpenWeatherMapWeatherData(cwd));
+                        listener.onWeatherDataAvailable(data);
                     }
                 } catch (Exception e) {
-                    Log.d("yawapp", "Failed to notify listener! Error was: " + e.getMessage());
+                    Log.d(TAG, "Failed to notify listener! Error was: " + e.getMessage());
                 }
             } catch (Exception e) {
-                Log.e("yawapp", "Failed to fetch weather data! Error was: " + e.getMessage());
+                Log.e(TAG, "Failed to fetch weather data! Error was: " + e.getMessage());
+                if (listener != null) {
+                    listener.onWeatherDataError();
+                }
+            }
+            return null;
+        }
+
+        public void setListener(WeatherDataListener listener) {
+            this.listener = listener;
+        }
+    }
+
+    private class GetLocationWeatherTask extends AsyncTask<Location, Void, Void> {
+        private WeatherDataListener listener;
+
+        @Override
+        protected Void doInBackground(Location... params) {
+            try {
+                CurrentWeatherData cwd = openWeatherMapAdapter.currentWeatherByCityCode(params[0].getId());
+                OpenWeatherMapWeatherData data = new OpenWeatherMapWeatherData(cwd);
+                try {
+                    if (listener != null) {
+                        listener.onWeatherDataAvailable(data);
+                    }
+                } catch (Exception e) {
+                    Log.d(TAG, "Failed to notify listener! Error was: " + e.getMessage());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to fetch weather data! Error was: " + e.getMessage());
                 if (listener != null) {
                     listener.onWeatherDataError();
                 }
@@ -47,5 +79,12 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
         GetWeatherTask task = new GetWeatherTask();
         task.setListener(listener);
         task.execute(query);
+    }
+
+    @Override
+    public void search(Location location, WeatherDataListener listener) {
+        GetLocationWeatherTask task = new GetLocationWeatherTask();
+        task.setListener(listener);
+        task.execute(location);
     }
 }

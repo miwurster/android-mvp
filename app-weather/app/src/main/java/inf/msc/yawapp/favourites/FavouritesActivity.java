@@ -29,7 +29,14 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
         setContentView(R.layout.activity_favourites);
         getActionBarToolbar();
 
+        presenter.init();
         presenter.update();
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.deinit();
+        super.onDestroy();
     }
 
     @Override
@@ -56,24 +63,34 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
 
     @Override
     public void clearView() {
-        LinearLayout list = (LinearLayout) findViewById(R.id.favList);
-        list.removeAllViews();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout list = (LinearLayout) findViewById(R.id.favList);
+                list.removeAllViews();
+            }
+        });
     }
 
     @Override
-    public void addFavourites(List<Location> items) {
-        LinearLayout list = (LinearLayout) findViewById(R.id.favList);
-        for (int i = 0; i < items.size(); i++) {
-            View convertView = getLayoutInflater().inflate(R.layout.item_favourites, list, false);
+    public void addFavourites(final List<Location> items) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout list = (LinearLayout) findViewById(R.id.favList);
+                for (int i = 0; i < items.size(); i++) {
+                    View convertView = getLayoutInflater().inflate(R.layout.item_favourites, list, false);
 
-            TextView city = (TextView) convertView.findViewById(R.id.city);
-            city.setText(items.get(i).getCity());
+                    TextView city = (TextView) convertView.findViewById(R.id.city);
+                    city.setText(items.get(i).getCity());
 
-            TextView misc = (TextView) convertView.findViewById(R.id.misc);
-            misc.setText(items.get(i).getCountry() + " " + items.get(i).getZip() + "  " + items.get(i).getAddress());
+                    TextView misc = (TextView) convertView.findViewById(R.id.misc);
+                    misc.setText(items.get(i).getCountry());
 
-            list.addView(convertView);
-        }
+                    list.addView(convertView);
+                }
+            }
+        });
     }
 
 }

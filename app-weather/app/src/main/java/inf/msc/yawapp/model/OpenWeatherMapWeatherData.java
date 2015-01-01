@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class OpenWeatherMapWeatherData implements WeatherData {
 
     private final CurrentWeatherData data;
+    private Location location;
     private Condition condition;
     private boolean daylight;
 
@@ -33,6 +34,32 @@ public class OpenWeatherMapWeatherData implements WeatherData {
             throw new IllegalArgumentException();
         }
         this.data = data;
+        this.location = new Location() {
+            @Override
+            public long getId() {
+                return data.getCityCode();
+            }
+
+            @Override
+            public String getCity() {
+                return data.getCityName();
+            }
+
+            @Override
+            public String getCountry() {
+                return data.getSysDataObject().getCountryCode();
+            }
+
+            @Override
+            public float getLatitude() {
+                return data.getCoordObject().getLatitude();
+            }
+
+            @Override
+            public float getLongitude() {
+                return data.getCoordObject().getLongitude();
+            }
+        };
         determineCondition();
     }
 
@@ -52,13 +79,8 @@ public class OpenWeatherMapWeatherData implements WeatherData {
     }
 
     @Override
-    public String getCityName() {
-        return data.getCityName();
-    }
-
-    @Override
-    public String getCountry() {
-        return data.getSysDataObject().getCountryCode();
+    public Location getLocation() {
+        return location;
     }
 
     @Override

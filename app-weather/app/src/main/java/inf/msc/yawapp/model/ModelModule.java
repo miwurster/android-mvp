@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import inf.msc.yawapp.common.GenericCache;
+import inf.msc.yawapp.common.GenericObservable;
 
 @Module(
         complete = false,
@@ -34,6 +35,12 @@ public class ModelModule {
     @Singleton
     public FavouritesStore provideFavouritesStore(FavouritesStoreImpl favouritesStore) {
         return favouritesStore;
+    }
+
+    @Provides
+    @Singleton
+    public GenericObservable<Location> provideLocationObservable() {
+        return new GenericObservable<>();
     }
 
     @Provides

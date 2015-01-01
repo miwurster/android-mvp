@@ -7,5 +7,5 @@ import inf.msc.yawapp.model.Location;
 public interface FavouritesView {
     public void clearView();
 
-    public void addFavourites(List<Location> items);
+    public void addFavourites(final List<Location> items);
 }

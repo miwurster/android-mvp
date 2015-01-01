@@ -9,7 +9,7 @@ import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
 
-public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
+public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, WeatherDataListener {
 
     public static final String BUNDLE_VIEW_STATE = "viewState";
 
@@ -29,12 +29,27 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     private ViewState viewState = ViewState.UNINITIALIZED;
 
     private void presentData(final WeatherData data) {
-        if (data.getCityName().isEmpty()) {
-            view.showCityName(data.getCountry());
+        if (data.getLocation().getCity().isEmpty()) {
+            view.showCityName(data.getLocation().getCountry());
         } else {
-            view.showCityName(data.getCityName());
+            view.showCityName(data.getLocation().getCity());
         }
         view.showWeatherCondition(data.getCondition(), data.isDay());
+    }
+
+    @Override
+    public void onWeatherDataAvailable(WeatherData data) {
+        viewState = ViewState.WEATHER;
+        view.showWeatherContent();
+        weatherDataCache.notifyAll(data);
+        presentData(data);
+    }
+
+    @Override
+    public void onWeatherDataError() {
+        viewState = ViewState.ERROR;
+        view.showSearchError();
+        weatherDataCache.notifyAll(null);
     }
 
     @Override
@@ -71,32 +86,15 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     public void search(String query) {
         viewState = ViewState.LOADING;
         view.showLoadingAnimation();
-        weatherSearchInteractor.search(query, new WeatherDataListener() {
-            @Override
-            public void onWeatherDataAvailable(WeatherData data) {
-                viewState = ViewState.WEATHER;
-                view.showWeatherContent();
-                weatherDataCache.notifyAll(data);
-                presentData(data);
-            }
-
-            @Override
-            public void onWeatherDataError() {
-                viewState = ViewState.ERROR;
-                view.showSearchError();
-                weatherDataCache.notifyAll(null);
-            }
-        });
+        weatherSearchInteractor.search(query, this);
     }
 
     @Override
     public void refresh() {
         if (weatherDataCache.getData() != null) {
-            String query = weatherDataCache.getData().getCityName();
-            if (query.isEmpty()) {
-                query = weatherDataCache.getData().getCountry();
-            }
-            search(query);
+            viewState = ViewState.LOADING;
+            view.showLoadingAnimation();
+            weatherSearchInteractor.search(weatherDataCache.getData().getLocation(), this);
         }
     }
 
