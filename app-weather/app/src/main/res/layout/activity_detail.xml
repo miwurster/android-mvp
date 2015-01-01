@@ -48,22 +48,11 @@
         </LinearLayout>
 
         <!-- Content -->
-        <ScrollView
+        <FrameLayout
             android:id="@+id/content_area"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin_horizontal"
-            android:layout_marginRight="@dimen/margin_horizontal"
-            android:paddingTop="@dimen/margin_vertical">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></FrameLayout>
 
-            <fragment
-                android:id="@+id/current_weather_fragment"
-                class="inf.msc.yawapp.details.current.CurrentWeatherFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_current" />
-
-        </ScrollView>
 
     </LinearLayout>
 </RelativeLayout>

@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -31,12 +33,17 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         UNINITIALIZED, INITIALIZED
     }
 
-    private ViewState viewState = ViewState.UNINITIALIZED;
-
     @Inject
     WeatherDetailsPresenter presenter;
 
+    private ViewState viewState = ViewState.UNINITIALIZED;
     private Map<WeatherData.Condition, String> conditionTexts;
+
+    private TextView widgetCityName;
+    private TextView widgetCityCondition;
+    private FrameLayout contentArea;
+    private View contentPageLoading;
+    private View contentPageCurrent;
 
     private void initConditionTexts() {
         Resources res = getResources();
@@ -61,6 +68,12 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
         setContentView(R.layout.activity_detail);
         initConditionTexts();
+
+        widgetCityName = (TextView) findViewById(R.id.city_name);
+        widgetCityCondition = (TextView) findViewById(R.id.city_condition);
+        contentArea = (FrameLayout) findViewById(R.id.content_area);
+        contentPageLoading = getLayoutInflater().inflate(R.layout.page_loading, contentArea, false);
+        contentPageCurrent = getLayoutInflater().inflate(R.layout.page_current, contentArea, false);
 
         final Toolbar toolbar = getActionBarToolbar();
         new Handler().post(new Runnable() {
@@ -114,6 +127,30 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     }
 
     @Override
+    public void showLoadingAnimation() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                widgetCityName.setText("");
+                widgetCityCondition.setText("");
+                contentArea.removeAllViews();
+                contentArea.addView(contentPageLoading);
+            }
+        });
+    }
+
+    @Override
+    public void showWeatherContent() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                contentArea.removeAllViews();
+                contentArea.addView(contentPageCurrent);
+            }
+        });
+    }
+
+    @Override
     public void showSearchError(String message) {
     }
 
@@ -122,8 +159,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView cityName = (TextView) findViewById(R.id.city_name);
-                cityName.setText(city);
+                widgetCityName.setText(city);
             }
         });
     }
@@ -133,10 +169,9 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView cityConditionWidget = (TextView) findViewById(R.id.city_condition);
                 String conditionText = conditionTexts.get(condition);
                 String daylightText = (isDay) ? getResources().getString(R.string.day) : getResources().getString(R.string.night);
-                cityConditionWidget.setText(String.format(CONDITION_FORMAT, conditionText, daylightText));
+                widgetCityCondition.setText(String.format(CONDITION_FORMAT, conditionText, daylightText));
             }
         });
     }

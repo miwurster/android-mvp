@@ -28,9 +28,11 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
 
     @Override
     public void search(String query) {
+        view.showLoadingAnimation();
         weatherSearchInteractor.search(query, new WeatherDataListener() {
             @Override
             public void onWeatherDataAvailable(WeatherData data) {
+                view.showWeatherContent();
                 weatherDataCache.notifyAll(data);
                 presentData(data);
             }
