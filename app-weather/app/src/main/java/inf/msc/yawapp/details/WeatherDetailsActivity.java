@@ -35,6 +35,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     private TextView widgetCityName;
     private TextView widgetCityCondition;
+    private MenuItem widgetFavouriteIcon;
     private FrameLayout contentArea;
     private View contentPageLoading;
     private View contentPageCurrent;
@@ -103,6 +104,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.details, menu);
+        widgetFavouriteIcon = menu.findItem(R.id.action_favourite);
         return true;
     }
 
@@ -114,6 +116,9 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
                 return true;
             case R.id.action_refresh:
                 presenter.refresh();
+                return true;
+            case R.id.action_favourite:
+                presenter.toggleFavourite();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -176,6 +181,15 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
                 widgetCityCondition.setText(String.format(CONDITION_FORMAT, conditionText, daylightText));
             }
         });
+    }
+
+    @Override
+    public void showFavouriteIcon(boolean isFavourite) {
+        if (isFavourite) {
+            widgetFavouriteIcon.setIcon(R.drawable.ic_favorite_white_24dp);
+        } else {
+            widgetFavouriteIcon.setIcon(R.drawable.ic_favorite_outline_white_24dp);
+        }
     }
 
     @Override

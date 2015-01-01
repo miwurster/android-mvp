@@ -15,4 +15,6 @@ public interface WeatherDetailsPresenter {
     public void refresh();
 
     public void presentExistingData();
+
+    public void toggleFavourite();
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import inf.msc.yawapp.common.GenericCache;
+import inf.msc.yawapp.model.FavouritesStore;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
@@ -22,6 +23,9 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
     @Inject
     GenericCache<WeatherData> weatherDataCache;
 
+    @Inject
+    FavouritesStore favouritesStore;
+
     private enum ViewState {
         UNINITIALIZED, LOADING, WEATHER, ERROR
     }
@@ -35,6 +39,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
             view.showCityName(data.getLocation().getCity());
         }
         view.showWeatherCondition(data.getCondition(), data.isDay());
+        view.showFavouriteIcon(favouritesStore.getById(data.getLocation().getId()) != null);
     }
 
     @Override
@@ -103,6 +108,20 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
         if (weatherDataCache.getData() != null) {
             final WeatherData data = weatherDataCache.getData();
             presentData(data);
+        }
+    }
+
+    @Override
+    public void toggleFavourite() {
+        if (weatherDataCache.getData() != null) {
+            final WeatherData data = weatherDataCache.getData();
+            if (favouritesStore.getById(data.getLocation().getId()) != null) {
+                favouritesStore.delete(data.getLocation());
+                view.showFavouriteIcon(false);
+            } else {
+                favouritesStore.add(data.getLocation());
+                view.showFavouriteIcon(true);
+            }
         }
     }
 }
