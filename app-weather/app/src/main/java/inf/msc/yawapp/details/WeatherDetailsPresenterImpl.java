@@ -40,7 +40,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter {
     @Override
     public void restore(Bundle savedInstancestate) {
         if (savedInstancestate != null) {
-            viewState = (ViewState) savedInstancestate.getSerializable("viewState");
+            viewState = (ViewState) savedInstancestate.getSerializable(BUNDLE_VIEW_STATE);
         }
         switch (viewState) {
             case LOADING:
