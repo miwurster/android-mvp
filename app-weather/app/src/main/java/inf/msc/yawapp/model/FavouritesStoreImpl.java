@@ -69,7 +69,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         ContentValues values = new ContentValues();
         values.put(ID, location.getId());
         values.put(LATITUDE, location.getLatitude());
-        values.put(LONGITUDE, location.getLatitude());
+        values.put(LONGITUDE, location.getLongitude());
         values.put(COUNTRY, location.getCountry());
         values.put(CITY, location.getCity());
 
@@ -87,7 +87,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         //Entry:
         ContentValues values = new ContentValues();
         values.put(LATITUDE, location.getLatitude());
-        values.put(LONGITUDE, location.getLatitude());
+        values.put(LONGITUDE, location.getLongitude());
         values.put(COUNTRY, location.getCountry());
         values.put(CITY, location.getCity());
 
@@ -120,7 +120,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         loc.setId(c.getLong(c.getColumnIndex(ID)));
         loc.setLongitude(c.getFloat(c.getColumnIndex(LONGITUDE)));
         loc.setLatitude(c.getFloat(c.getColumnIndex(LATITUDE)));
-        loc.setCountry(c.getString(c.getColumnIndex(CITY)));
+        loc.setCountry(c.getString(c.getColumnIndex(COUNTRY)));
         loc.setCity(c.getString(c.getColumnIndex(CITY)));
 
         c.close();
@@ -145,7 +145,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
             loc.setId(c.getLong(c.getColumnIndex(ID)));
             loc.setLongitude(c.getFloat(c.getColumnIndex(LONGITUDE)));
             loc.setLatitude(c.getFloat(c.getColumnIndex(LATITUDE)));
-            loc.setCountry(c.getString(c.getColumnIndex(CITY)));
+            loc.setCountry(c.getString(c.getColumnIndex(COUNTRY)));
             loc.setCity(c.getString(c.getColumnIndex(CITY)));
 
             result.add(loc);
