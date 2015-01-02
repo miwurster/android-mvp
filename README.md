@@ -1,4 +1,4 @@
-## Modern Android application development: An approach using MVP
+### Modern Android application development: An approach using MVP
 
 #### Yet another Weather App
 
