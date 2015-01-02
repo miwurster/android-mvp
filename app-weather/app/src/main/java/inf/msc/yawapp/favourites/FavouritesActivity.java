@@ -32,6 +32,13 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
         setContentView(R.layout.activity_favourites);
         getActionBarToolbar();
 
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                getActionBarToolbar().setTitle(R.string.activity_header_favourites);
+            }
+        });
+
         ListView favouritesList = (ListView) findViewById(R.id.favourites_container);
         favouritesListAdapter = new FavouritesListViewAdapter(this);
         favouritesList.setAdapter(favouritesListAdapter);
