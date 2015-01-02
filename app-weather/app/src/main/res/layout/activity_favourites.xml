@@ -10,7 +10,14 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_actionbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="@dimen/elevation">
+
+            <include layout="@layout/toolbar_actionbar" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
