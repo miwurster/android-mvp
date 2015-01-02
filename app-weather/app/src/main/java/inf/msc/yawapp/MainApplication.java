@@ -7,6 +7,7 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import inf.msc.yawapp.model.ModelModule;
+import inf.msc.yawapp.navigation.NavigationModule;
 import inf.msc.yawapp.owm.OpenWeatherMapModule;
 
 public class MainApplication extends Application {
@@ -24,6 +25,7 @@ public class MainApplication extends Application {
         return Arrays.<Object>asList(
                 new MainModule(this),
                 new ModelModule(),
+                new NavigationModule(),
                 new OpenWeatherMapModule());
     }
 

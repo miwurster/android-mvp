@@ -16,4 +16,7 @@
     <dimen name="keyline1">@dimen/activity_horizontal_margin</dimen>
     <dimen name="keyline2">72dp</dimen>
     <dimen name="keyline3">96dp</dimen>
+
+    <!-- Navigation Drawer -->
+    <dimen name="nav_drawer_width">260dp</dimen>
 </resources>

@@ -4,6 +4,9 @@
     <string name="app_name">Yet Another Weather App</string>
     <string name="app_name_short">yaWapp</string>
 
+    <string name="nav_maps">Map</string>
+    <string name="nav_favourites">Favourites</string>
+
     <string name="activity_header_favourites">Favourites</string>
     <string name="activity_header_search">Search</string>
 

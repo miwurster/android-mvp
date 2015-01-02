@@ -47,4 +47,9 @@
         <item name="android:background">@drawable/section_separator</item>
     </style>
 
+    <style name="NavDrawer">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:divider">@android:color/transparent</item>
+    </style>
+
 </resources>
