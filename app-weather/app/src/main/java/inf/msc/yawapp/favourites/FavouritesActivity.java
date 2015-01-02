@@ -16,12 +16,16 @@ import javax.inject.Inject;
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.model.Location;
+import inf.msc.yawapp.model.SubmitSearchInteractor;
 import inf.msc.yawapp.search.SearchActivity;
 
 public class FavouritesActivity extends BaseModuleActivity implements FavouritesView {
 
     @Inject
     FavouritesPresenter presenter;
+
+    @Inject
+    SubmitSearchInteractor submitSearchInteractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,14 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
 
                     TextView misc = (TextView) convertView.findViewById(R.id.misc);
                     misc.setText(items.get(i).getCountry());
+
+                    final Location location = items.get(i);
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            submitSearchInteractor.submitSearch(location);
+                        }
+                    });
 
                     list.addView(convertView);
                 }

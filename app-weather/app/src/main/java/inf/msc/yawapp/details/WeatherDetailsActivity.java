@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.common.Intents;
+import inf.msc.yawapp.model.Location;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.search.SearchActivity;
 
@@ -97,7 +98,11 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         super.onNewIntent(intent);
         setIntent(intent);
         if (intent.getAction().equals(Intents.SEARCH_WEATHER)) {
-            presenter.search(intent.getExtras().getString("query"));
+            if (intent.hasExtra("location")) {
+                presenter.search((Location) intent.getExtras().getSerializable("location"));
+            } else {
+                presenter.search(intent.getExtras().getString("query"));
+            }
         }
     }
 
@@ -188,9 +193,14 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     @Override
     public void showFavouriteIcon(boolean isFavourite) {
         favouriteIcon = (isFavourite) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_white_24dp;
-        if (widgetFavouriteIcon != null) {
-            widgetFavouriteIcon.setIcon(favouriteIcon);
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (widgetFavouriteIcon != null) {
+                    widgetFavouriteIcon.setIcon(favouriteIcon);
+                }
+            }
+        });
     }
 
     @Override

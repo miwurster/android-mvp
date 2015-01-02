@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.common.GenericCache;
 import inf.msc.yawapp.model.FavouritesStore;
+import inf.msc.yawapp.model.Location;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
@@ -95,11 +96,16 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
     }
 
     @Override
+    public void search(Location location) {
+        viewState = ViewState.LOADING;
+        view.showLoadingAnimation();
+        weatherSearchInteractor.search(location, this);
+    }
+
+    @Override
     public void refresh() {
         if (weatherDataCache.getData() != null) {
-            viewState = ViewState.LOADING;
-            view.showLoadingAnimation();
-            weatherSearchInteractor.search(weatherDataCache.getData().getLocation(), this);
+            search(weatherDataCache.getData().getLocation());
         }
     }
 

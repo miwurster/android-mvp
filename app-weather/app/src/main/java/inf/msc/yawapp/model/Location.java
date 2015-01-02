@@ -1,6 +1,8 @@
 package inf.msc.yawapp.model;
 
-public interface Location {
+import java.io.Serializable;
+
+public interface Location extends Serializable {
     public long getId();
 
     public String getCity();
