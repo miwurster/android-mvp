@@ -23,7 +23,6 @@ import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.common.Intents;
 import inf.msc.yawapp.model.Location;
 import inf.msc.yawapp.model.WeatherData;
-import inf.msc.yawapp.search.SearchActivity;
 
 public class WeatherDetailsActivity extends BaseModuleActivity implements WeatherDetailsView {
 
@@ -127,7 +126,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                startActivity(new Intent(this, SearchActivity.class));
+                presenter.navigateToSearch(this);
                 return true;
             case R.id.action_refresh:
                 presenter.refresh();

@@ -13,6 +13,18 @@ import dagger.Provides;
 )
 public class MapModule {
 
+    private final MapView view;
+
+    public MapModule(MapView view) {
+        this.view = view;
+    }
+
+    @Provides
+    @Singleton
+    public MapView provideMapView() {
+        return view;
+    }
+
     @Provides
     @Singleton
     public MapPresenter provideMapPresenter(MapPresenterImpl presenter) {

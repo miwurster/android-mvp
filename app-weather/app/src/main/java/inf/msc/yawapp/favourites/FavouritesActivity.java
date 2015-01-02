@@ -1,6 +1,5 @@
 package inf.msc.yawapp.favourites;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -17,7 +16,6 @@ import javax.inject.Inject;
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.model.Location;
-import inf.msc.yawapp.search.SearchActivity;
 
 public class FavouritesActivity extends BaseModuleActivity implements FavouritesView {
 
@@ -76,7 +74,7 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                startActivity(new Intent(this, SearchActivity.class));
+                presenter.navigateToSearch(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);

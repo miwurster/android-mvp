@@ -4,4 +4,6 @@ import android.content.Context;
 
 public interface NavigationPresenter {
     public boolean navigate(NavDrawerItem item, Context context);
+
+    public void navigateSearch(Context context);
 }

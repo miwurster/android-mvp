@@ -1,5 +1,6 @@
 package inf.msc.yawapp.details;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import inf.msc.yawapp.model.Location;
 import inf.msc.yawapp.model.WeatherData;
 import inf.msc.yawapp.model.WeatherDataListener;
 import inf.msc.yawapp.model.WeatherSearchInteractor;
+import inf.msc.yawapp.navigation.NavigationPresenter;
 
 public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, WeatherDataListener {
 
@@ -26,6 +28,9 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
 
     @Inject
     FavouritesStore favouritesStore;
+
+    @Inject
+    NavigationPresenter navigationPresenter;
 
     private enum ViewState {
         UNINITIALIZED, LOADING, WEATHER, ERROR
@@ -100,6 +105,11 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
         viewState = ViewState.LOADING;
         view.showLoadingAnimation();
         weatherSearchInteractor.search(location, this);
+    }
+
+    @Override
+    public void navigateToSearch(Context context) {
+        navigationPresenter.navigateSearch(context);
     }
 
     @Override

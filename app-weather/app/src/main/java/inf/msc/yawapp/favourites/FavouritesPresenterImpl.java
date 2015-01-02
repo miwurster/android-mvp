@@ -1,5 +1,7 @@
 package inf.msc.yawapp.favourites;
 
+import android.content.Context;
+
 import javax.inject.Inject;
 
 import inf.msc.yawapp.common.GenericObservable;
@@ -7,6 +9,7 @@ import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.FavouritesStore;
 import inf.msc.yawapp.model.FavouritesStoreOperation;
 import inf.msc.yawapp.model.Location;
+import inf.msc.yawapp.navigation.NavigationPresenter;
 import inf.msc.yawapp.navigation.SubmitSearchInteractor;
 
 public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObserver<FavouritesStoreOperation> {
@@ -22,6 +25,9 @@ public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObse
 
     @Inject
     SubmitSearchInteractor submitSearchInteractor;
+
+    @Inject
+    NavigationPresenter navigationPresenter;
 
     @Override
     public void init() {
@@ -42,6 +48,11 @@ public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObse
     @Override
     public void submitSearch(Location location) {
         submitSearchInteractor.submitSearch(location);
+    }
+
+    @Override
+    public void navigateToSearch(Context context) {
+        navigationPresenter.navigateSearch(context);
     }
 
     @Override

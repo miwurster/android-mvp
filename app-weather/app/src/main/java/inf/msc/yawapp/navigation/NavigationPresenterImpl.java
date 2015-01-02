@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import inf.msc.yawapp.favourites.FavouritesActivity;
 import inf.msc.yawapp.map.MapActivity;
+import inf.msc.yawapp.search.SearchActivity;
 
 public class NavigationPresenterImpl implements NavigationPresenter {
 
@@ -24,5 +25,11 @@ public class NavigationPresenterImpl implements NavigationPresenter {
                 return false;
         }
         return true;
+    }
+
+    @Override
+    public void navigateSearch(Context context) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        context.startActivity(intent);
     }
 }
