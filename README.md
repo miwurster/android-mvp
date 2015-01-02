@@ -1,25 +1,10 @@
-Modern Android application development: An approach using MVP
-===========
+## Modern Android application development: An approach using MVP
 
-Paper
------
+#### Yet another Weather App
 
-Comments regarding the structure of the paper:
+Simple Android application showing our MVP approach.
 
-- Main document is paper.tex
-  * Contains structure and layout
-  * Compile this file to get the pdf
-- Content is distributed over the files in the Content folder
-  * 01 to 03 contain the respective chapters
-  * other files are self-explaining
-  * File 02research.tex contains some advice how to create figures and tables with the template
+#### Paper
 
-MVP Structure
--------------
-
-COMMING SOON
-
-Weather App
------------
-
-COMMING SOON
+* Main document is `paper.tex`, it contains structure and layout
+* Content is distributed over the files in the `Content` folder
