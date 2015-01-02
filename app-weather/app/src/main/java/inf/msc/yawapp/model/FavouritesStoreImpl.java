@@ -17,7 +17,7 @@ import inf.msc.yawapp.common.GenericObservable;
 public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesStore {
 
     @Inject
-    GenericObservable<Location> locationObservable;
+    GenericObservable<FavouritesStoreOperation> favouritesStoreObservable;
 
     private static final String TAG = FavouritesStoreImpl.class.getSimpleName();
 
@@ -45,6 +45,26 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
             + CITY + " VARCHAR(255))";
     public static final String DROP = "DROP TABLE IF EXISTS " + FAV_TABLE;
 
+    private class StoreOperation implements FavouritesStoreOperation {
+        private Operation op;
+        private Location location;
+
+        public StoreOperation(Operation op, Location location) {
+            this.op = op;
+            this.location = location;
+        }
+
+        @Override
+        public Operation getOperation() {
+            return op;
+        }
+
+        @Override
+        public Location getLocation() {
+            return location;
+        }
+    }
+
     @Inject
     public FavouritesStoreImpl(MainApplication context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,7 +82,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
     }
 
     @Override
-    public void add(Location location) {
+    public void add(final Location location) {
         SQLiteDatabase db = getWritableDatabase();
 
         //Entry:
@@ -76,7 +96,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         long rowID = db.insert(FAV_TABLE, null, values);
         if (rowID != -1) {
             Log.d(TAG, "location added with rowID: " + rowID);
-            locationObservable.notifyAll(location);
+            favouritesStoreObservable.notifyAll(new StoreOperation(FavouritesStoreOperation.Operation.ADDED, location));
         }
     }
 
@@ -94,6 +114,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         long rowID = db.update(FAV_TABLE, values, ID + " = ? ", new String[]{Long.toString(location.getId())});
 
         Log.d(TAG, "location updated with rowID: " + rowID);
+        favouritesStoreObservable.notifyAll(new StoreOperation(FavouritesStoreOperation.Operation.UPDATED, location));
     }
 
     @Override
@@ -102,6 +123,7 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         long rowID = db.delete(FAV_TABLE, ID + " = ? ", new String[]{Long.toString(location.getId())});
 
         Log.d(TAG, "location deleted with rowID: " + rowID);
+        favouritesStoreObservable.notifyAll(new StoreOperation(FavouritesStoreOperation.Operation.DELETED, location));
     }
 
     @Override

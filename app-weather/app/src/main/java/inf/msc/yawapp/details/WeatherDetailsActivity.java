@@ -40,6 +40,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
     private View contentPageLoading;
     private View contentPageCurrent;
     private View contentPageError;
+    private int favouriteIcon = R.drawable.ic_favorite_outline_white_24dp;
 
     private void initConditionTexts() {
         Resources res = getResources();
@@ -105,6 +106,7 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.details, menu);
         widgetFavouriteIcon = menu.findItem(R.id.action_favourite);
+        widgetFavouriteIcon.setIcon(favouriteIcon);
         return true;
     }
 
@@ -185,10 +187,9 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
 
     @Override
     public void showFavouriteIcon(boolean isFavourite) {
-        if (isFavourite) {
-            widgetFavouriteIcon.setIcon(R.drawable.ic_favorite_white_24dp);
-        } else {
-            widgetFavouriteIcon.setIcon(R.drawable.ic_favorite_outline_white_24dp);
+        favouriteIcon = (isFavourite) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_white_24dp;
+        if (widgetFavouriteIcon != null) {
+            widgetFavouriteIcon.setIcon(favouriteIcon);
         }
     }
 

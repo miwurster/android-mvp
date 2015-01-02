@@ -39,7 +39,7 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    public GenericObservable<Location> provideLocationObservable() {
+    public GenericObservable<FavouritesStoreOperation> provideFavouritesStoreObservable() {
         return new GenericObservable<>();
     }
 
