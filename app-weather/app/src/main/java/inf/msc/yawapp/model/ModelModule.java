@@ -22,7 +22,7 @@ public class ModelModule {
     @Provides
     @Singleton
     public GenericCache<WeatherData> provideWeatherDataCache() {
-        return new GenericCache<WeatherData>();
+        return new GenericCache<>();
     }
 
     @Provides

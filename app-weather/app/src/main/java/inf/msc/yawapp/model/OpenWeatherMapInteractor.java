@@ -20,8 +20,9 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
     private abstract class AbstractGetWeatherTask<T> extends AsyncTask<T, Void, Void> {
         private WeatherDataListener listener;
 
+        @SafeVarargs
         @Override
-        protected Void doInBackground(T... params) {
+        protected final Void doInBackground(T... params) {
             try {
                 CurrentWeatherData cwd = getCurrentWeatherData(params[0]);
                 OpenWeatherMapWeatherData data = new OpenWeatherMapWeatherData(cwd);

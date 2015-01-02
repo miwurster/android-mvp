@@ -82,6 +82,7 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
         if (navList == null) {
             return;
         }
+        @SuppressWarnings("unchecked")
         ArrayAdapter<NavDrawerItem> navListAdapter = (ArrayAdapter<NavDrawerItem>) navList.getAdapter();
         if (navListAdapter == null) {
             navListAdapter = new NavDrawerListViewAdapter(this);
@@ -100,8 +101,9 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
                     new Handler().post(new Runnable() {
                         @Override
                         public void run() {
-                            navigationPresenter.navigate(item, context);
-                            finish();
+                            if (navigationPresenter.navigate(item, context)) {
+                                finish();
+                            }
                         }
                     });
                 }

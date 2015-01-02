@@ -160,10 +160,10 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         Cursor c = db.query(FAV_TABLE, null, null, null, null, null, CITY);
 
         if (!c.moveToFirst()) {
-            return new ArrayList<Location>();
+            return new ArrayList<>();
         } //empty case
 
-        List<Location> result = new ArrayList<Location>();
+        List<Location> result = new ArrayList<>();
         do {
             MutableLocation loc = new FavouritesStoreEntry();
             loc.setId(c.getLong(c.getColumnIndex(ID)));

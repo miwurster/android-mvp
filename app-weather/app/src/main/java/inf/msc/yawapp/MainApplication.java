@@ -22,7 +22,7 @@ public class MainApplication extends Application {
     }
 
     private List<Object> getModules() {
-        return Arrays.<Object>asList(
+        return Arrays.asList(
                 new MainModule(this),
                 new ModelModule(),
                 new NavigationModule(),
