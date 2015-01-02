@@ -6,19 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import inf.msc.yawapp.R;
 
 public class NavDrawerListViewAdapter extends ArrayAdapter<NavDrawerItem> {
-    public static final int LAYOUT_RESOURCE = android.R.layout.simple_list_item_1;
+    public static final int LAYOUT_RESOURCE = R.layout.nav_drawer_item;
 
     public NavDrawerListViewAdapter(Context context) {
         super(context, LAYOUT_RESOURCE);
-    }
-
-    public NavDrawerListViewAdapter(Context context, List<NavDrawerItem> objects) {
-        super(context, LAYOUT_RESOURCE, objects);
     }
 
     @Override
@@ -28,8 +25,10 @@ public class NavDrawerListViewAdapter extends ArrayAdapter<NavDrawerItem> {
             convertView = inflater.inflate(LAYOUT_RESOURCE, parent, false);
         }
         NavDrawerItem item = getItem(position);
-        TextView textView = (TextView) convertView;
+        TextView textView = (TextView) convertView.findViewById(R.id.nav_item_title);
         textView.setText(getContext().getResources().getString(item.getTitleResource()));
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.nav_item_icon);
+        imageView.setImageResource(item.getIconResource());
 
         return convertView;
     }

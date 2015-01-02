@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
 import inf.msc.yawapp.model.Location;
 
 public class FavouritesListViewAdapter extends ArrayAdapter<Location> {
@@ -17,10 +15,6 @@ public class FavouritesListViewAdapter extends ArrayAdapter<Location> {
 
     public FavouritesListViewAdapter(Context context) {
         super(context, LAYOUT_RESOURCE);
-    }
-
-    public FavouritesListViewAdapter(Context context, List<Location> objects) {
-        super(context, LAYOUT_RESOURCE, objects);
     }
 
     @Override

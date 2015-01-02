@@ -41,5 +41,6 @@
     <string name="placeholder_pressure">0 hPa</string>
     <string name="placeholder_wind_speed">0 m/s</string>
     <string name="placeholder_wind_direction">0 °</string>
+    <string name="placeholder_lorem_ipsum">Lorem Ipsum</string>
 
 </resources>
