@@ -57,5 +57,15 @@ public class OpenWeatherMapAdapterImpl implements OpenWeatherMapAdapter {
             throw new OpenWeatherMapException(e);
         }
     }
+
+    @Override
+    public CurrentWeatherData currentWeatherByCoord(float latitude, float longitude) throws OpenWeatherMapException {
+        try {
+            String jsonResponseString = response.currentWeatherByCoordinates(latitude, longitude);
+            return handleResponse(jsonResponseString);
+        } catch (IOException e) {
+            throw new OpenWeatherMapException(e);
+        }
+    }
 }
 
