@@ -1,6 +1,9 @@
 package inf.msc.yawapp.map;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -15,6 +18,7 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
+import inf.msc.yawapp.search.SearchActivity;
 
 public class MapActivity extends BaseModuleActivity implements GoogleMap.OnMapLongClickListener, GoogleMap.OnMarkerClickListener {
 
@@ -31,8 +35,26 @@ public class MapActivity extends BaseModuleActivity implements GoogleMap.OnMapLo
         getActionBarToolbar();
 
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMap().getUiSettings().setZoomControlsEnabled(true);
         mapFragment.getMap().setOnMapLongClickListener(this);
         mapFragment.getMap().setOnMarkerClickListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.map, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                startActivity(new Intent(this, SearchActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
