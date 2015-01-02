@@ -78,6 +78,14 @@ public class WeatherDetailsActivity extends BaseModuleActivity implements Weathe
                 toolbar.setTitle("");
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         presenter.restore(savedInstanceState);
         if (!presenter.isInitialized()) {

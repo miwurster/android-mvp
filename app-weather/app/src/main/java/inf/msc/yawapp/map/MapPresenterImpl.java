@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.inject.Inject;
 
 import inf.msc.yawapp.model.Location;
-import inf.msc.yawapp.model.SubmitSearchInteractor;
+import inf.msc.yawapp.navigation.SubmitSearchInteractor;
 
 public class MapPresenterImpl implements MapPresenter {
 

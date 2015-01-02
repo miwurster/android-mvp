@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import inf.msc.yawapp.model.SearchSuggestions;
-import inf.msc.yawapp.model.SubmitSearchInteractor;
+import inf.msc.yawapp.navigation.SubmitSearchInteractor;
 
 public class SearchPresenterImpl implements SearchPresenter {
     @Inject

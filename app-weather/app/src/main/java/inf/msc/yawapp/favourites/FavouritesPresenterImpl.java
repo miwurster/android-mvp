@@ -7,7 +7,7 @@ import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.FavouritesStore;
 import inf.msc.yawapp.model.FavouritesStoreOperation;
 import inf.msc.yawapp.model.Location;
-import inf.msc.yawapp.model.SubmitSearchInteractor;
+import inf.msc.yawapp.navigation.SubmitSearchInteractor;
 
 public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObserver<FavouritesStoreOperation> {
 

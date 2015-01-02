@@ -13,7 +13,13 @@ public class NavigationModule {
 
     @Provides
     @Singleton
-    public NavigationPresenter provideNavigationPresenter(NavigationPresenterImpl presenter) {
-        return presenter;
+    public NavigationPresenter provideNavigationPresenter() {
+        return new NavigationPresenterImpl();
+    }
+
+    @Provides
+    @Singleton
+    public SubmitSearchInteractor provideSubmitSearchInteractor(SubmitSearchInteractorImpl interactor) {
+        return interactor;
     }
 }

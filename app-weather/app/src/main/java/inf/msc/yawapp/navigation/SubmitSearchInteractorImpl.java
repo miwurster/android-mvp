@@ -1,4 +1,4 @@
-package inf.msc.yawapp.model;
+package inf.msc.yawapp.navigation;
 
 import android.content.Intent;
 
@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import inf.msc.yawapp.MainApplication;
 import inf.msc.yawapp.common.Intents;
+import inf.msc.yawapp.model.Location;
 
 public class SubmitSearchInteractorImpl implements SubmitSearchInteractor {
 
