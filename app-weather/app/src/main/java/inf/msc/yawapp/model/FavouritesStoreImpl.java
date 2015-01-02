@@ -38,11 +38,13 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
     // SQL Commands
     public static final String CREATE = "CREATE TABLE "
             + FAV_TABLE + " ("
-            + ID + " INTEGER PRIMARY KEY, "
+            + ID + " INTEGER, "
             + LONGITUDE + " REAL, "
             + LATITUDE + " REAL, "
             + COUNTRY + " VARCHAR(255), "
-            + CITY + " VARCHAR(255))";
+            + CITY + " VARCHAR(255), "
+            + "PRIMARY KEY(" + ID + ", " + CITY + ") "
+            + ")";
     public static final String DROP = "DROP TABLE IF EXISTS " + FAV_TABLE;
 
     private class StoreOperation implements FavouritesStoreOperation {
@@ -174,6 +176,18 @@ public class FavouritesStoreImpl extends SQLiteOpenHelper implements FavouritesS
         } while (c.moveToNext());
 
         c.close();
+        return result;
+    }
+
+    @Override
+    public boolean hasLocation(Location location) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        //SELECT * FROM FAV_TABLE WHERE ID = id AND CITY = city
+        Cursor c = db.query(FAV_TABLE, null, ID + "= ? AND " + CITY + "= ?", new String[]{Long.toString(location.getId()), location.getCity()}, null, null, null);
+        boolean result = c.moveToFirst();
+        c.close();
+
         return result;
     }
 

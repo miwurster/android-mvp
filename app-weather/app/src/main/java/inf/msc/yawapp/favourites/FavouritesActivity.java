@@ -2,11 +2,12 @@ package inf.msc.yawapp.favourites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,6 @@ import javax.inject.Inject;
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
 import inf.msc.yawapp.model.Location;
-import inf.msc.yawapp.model.SubmitSearchInteractor;
 import inf.msc.yawapp.search.SearchActivity;
 
 public class FavouritesActivity extends BaseModuleActivity implements FavouritesView {
@@ -24,14 +24,29 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
     @Inject
     FavouritesPresenter presenter;
 
-    @Inject
-    SubmitSearchInteractor submitSearchInteractor;
+    private FavouritesListViewAdapter favouritesListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
         getActionBarToolbar();
+
+        ListView favouritesList = (ListView) findViewById(R.id.favourites_container);
+        favouritesListAdapter = new FavouritesListViewAdapter(this);
+        favouritesList.setAdapter(favouritesListAdapter);
+        favouritesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Location item = (Location) parent.getItemAtPosition(position);
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        presenter.submitSearch(item);
+                    }
+                });
+            }
+        });
 
         presenter.init();
         presenter.update();
@@ -67,42 +82,12 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
 
     @Override
     public void clearView() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                LinearLayout list = (LinearLayout) findViewById(R.id.favList);
-                list.removeAllViews();
-            }
-        });
+        favouritesListAdapter.clear();
     }
 
     @Override
     public void addFavourites(final List<Location> items) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                LinearLayout list = (LinearLayout) findViewById(R.id.favList);
-                for (int i = 0; i < items.size(); i++) {
-                    View convertView = getLayoutInflater().inflate(R.layout.item_favourites, list, false);
-
-                    TextView city = (TextView) convertView.findViewById(R.id.city);
-                    city.setText(items.get(i).getCity());
-
-                    TextView misc = (TextView) convertView.findViewById(R.id.misc);
-                    misc.setText(items.get(i).getCountry());
-
-                    final Location location = items.get(i);
-                    convertView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            submitSearchInteractor.submitSearch(location);
-                        }
-                    });
-
-                    list.addView(convertView);
-                }
-            }
-        });
+        favouritesListAdapter.addAll(items);
     }
 
 }

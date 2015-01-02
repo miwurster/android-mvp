@@ -14,4 +14,6 @@ public interface FavouritesStore {
 
     public List<Location> getAll();
 
+    public boolean hasLocation(Location location);
+
 }

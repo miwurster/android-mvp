@@ -83,8 +83,12 @@ public class OpenWeatherMapInteractor implements WeatherSearchInteractor {
 
     @Override
     public void search(Location location, WeatherDataListener listener) {
-        GetLocationWeatherTask task = new GetLocationWeatherTask();
-        task.setListener(listener);
-        task.execute(location);
+        if (location.getId() > 0) {
+            GetLocationWeatherTask task = new GetLocationWeatherTask();
+            task.setListener(listener);
+            task.execute(location);
+        } else {
+            search(location.getCity(), listener);
+        }
     }
 }

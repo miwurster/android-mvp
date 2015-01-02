@@ -40,7 +40,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
             view.showCityName(data.getLocation().getCity());
         }
         view.showWeatherCondition(data.getCondition(), data.isDay());
-        view.showFavouriteIcon(favouritesStore.getById(data.getLocation().getId()) != null);
+        view.showFavouriteIcon(favouritesStore.hasLocation(data.getLocation()));
     }
 
     @Override
@@ -121,7 +121,7 @@ public class WeatherDetailsPresenterImpl implements WeatherDetailsPresenter, Wea
     public void toggleFavourite() {
         if (weatherDataCache.getData() != null) {
             final WeatherData data = weatherDataCache.getData();
-            if (favouritesStore.getById(data.getLocation().getId()) != null) {
+            if (favouritesStore.hasLocation(data.getLocation())) {
                 favouritesStore.delete(data.getLocation());
                 view.showFavouriteIcon(false);
             } else {

@@ -6,6 +6,8 @@ import inf.msc.yawapp.common.GenericObservable;
 import inf.msc.yawapp.common.GenericObserver;
 import inf.msc.yawapp.model.FavouritesStore;
 import inf.msc.yawapp.model.FavouritesStoreOperation;
+import inf.msc.yawapp.model.Location;
+import inf.msc.yawapp.model.SubmitSearchInteractor;
 
 public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObserver<FavouritesStoreOperation> {
 
@@ -17,6 +19,9 @@ public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObse
 
     @Inject
     GenericObservable<FavouritesStoreOperation> favouritesStoreObservable;
+
+    @Inject
+    SubmitSearchInteractor submitSearchInteractor;
 
     @Override
     public void init() {
@@ -32,6 +37,11 @@ public class FavouritesPresenterImpl implements FavouritesPresenter, GenericObse
     public void update() {
         view.clearView();
         view.addFavourites(model.getAll());
+    }
+
+    @Override
+    public void submitSearch(Location location) {
+        submitSearchInteractor.submitSearch(location);
     }
 
     @Override
