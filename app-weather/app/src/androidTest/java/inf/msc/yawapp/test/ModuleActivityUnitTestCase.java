@@ -15,6 +15,16 @@ import android.view.Window;
 import inf.msc.yawapp.R;
 import inf.msc.yawapp.common.BaseModuleActivity;
 
+/**
+ * Unit test case class for BaseModuleActivities
+ * <p/>
+ * This class was created due to a bug in the ActivityUnitTestCase class of the android test
+ * framework (Issue no. 22737: https://code.google.com/p/android/issues/detail?id=22737).
+ * The ActivityUnitTestCase class does not work with activities in sub-packages.
+ *
+ * @param <T>
+ */
+@SuppressWarnings("unchecked")
 public class ModuleActivityUnitTestCase<T extends BaseModuleActivity> extends ActivityTestCase {
 
     private Class<T> activityClass;
@@ -29,6 +39,8 @@ public class ModuleActivityUnitTestCase<T extends BaseModuleActivity> extends Ac
     }
 
     protected T startActivity(Bundle savedInstanceState) {
+        assertFalse("Activity already created", isCreated);
+
         if (!isAttached) {
             assertNotNull(activityClass);
             setActivity(null);
@@ -96,6 +108,9 @@ public class ModuleActivityUnitTestCase<T extends BaseModuleActivity> extends Ac
         this.activityContext = activityContext;
     }
 
+    /**
+     * Copied from ActivityUnitTestCase
+     */
     private static class MockParent extends Activity {
 
         public int requestedOrientation = 0;

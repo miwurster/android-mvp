@@ -39,6 +39,13 @@ public class FavouritesActivityTest extends ModuleActivityUnitTestCase<Favourite
         assertEquals(1, presenter.updateCount);
     }
 
+    /**
+     * This test fills the favourites list view with two test location objects and expects those
+     * entries to be visible in the list.
+     * Afterwards the test attempts to clear the list through the FavouritesView interface.
+     *
+     * @throws Exception
+     */
     public void testFavouritesList() throws Exception {
         ListView list = (ListView) activity.findViewById(R.id.favourites_container);
         assertNotNull(list);
@@ -62,27 +69,22 @@ public class FavouritesActivityTest extends ModuleActivityUnitTestCase<Favourite
         testLocation.longitude = 4.f;
         testLocations.add(testLocation);
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.addFavourites(testLocations);
-            }
-        });
-        getInstrumentation().waitForIdleSync();
+        activity.addFavourites(testLocations);
         assertEquals(2, list.getCount());
         assertEquals("Paradise City", ((Location) list.getItemAtPosition(0)).getCity());
 
         // Clear list
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.clearView();
-            }
-        });
-        getInstrumentation().waitForIdleSync();
+        activity.clearView();
         assertEquals(0, list.getCount());
     }
 
+    /**
+     * Gives a test location object to the activity and simulates a click on that item in the
+     * favourites list. The test expects the presenter to be called once with exactly the same
+     * location object given to the view.
+     *
+     * @throws Exception
+     */
     public void testFavouritesListClick() throws Exception {
         final ListView list = (ListView) activity.findViewById(R.id.favourites_container);
         assertNotNull(list);
@@ -96,23 +98,24 @@ public class FavouritesActivityTest extends ModuleActivityUnitTestCase<Favourite
         testLocation.city = "Paradise City";
         testLocations.add(testLocation);
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.addFavourites(testLocations);
-            }
-        });
-        getInstrumentation().waitForIdleSync();
+        // Give the location to the activity through the FavouritesView interface
+        activity.addFavourites(testLocations);
         assertEquals(1, list.getCount());
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                list.performItemClick(list.getChildAt(0), 0, list.getItemIdAtPosition(0));
-            }
-        });
-        getInstrumentation().waitForIdleSync();
+        // Click on that item in the list
+        list.performItemClick(list.getChildAt(0), 0, list.getItemIdAtPosition(0));
         assertEquals(1, presenter.submitSearchList.size());
         assertEquals(testLocation, presenter.submitSearchList.get(0));
+    }
+
+    /**
+     * Tests if the presenter object is notified correctly on destruction of the activity.
+     *
+     * @throws Exception
+     */
+    public void testDestroyActivity() throws Exception {
+        assertEquals(0, presenter.deinitCount);
+        getInstrumentation().callActivityOnDestroy(activity);
+        assertEquals(1, presenter.deinitCount);
     }
 }
