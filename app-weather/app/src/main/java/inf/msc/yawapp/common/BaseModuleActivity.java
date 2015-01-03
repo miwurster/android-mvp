@@ -34,8 +34,7 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        moduleGraph = ((MainApplication) getApplication()).createSubGraph(getModules().toArray());
-        moduleGraph.inject(this);
+        setModuleGraph(((MainApplication) getApplication()).createSubGraph(getModules().toArray()));
     }
 
     @Override
@@ -48,6 +47,11 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         moduleGraph = null;
+    }
+
+    public void setModuleGraph(ObjectGraph moduleGraph) {
+        this.moduleGraph = moduleGraph;
+        this.moduleGraph.inject(this);
     }
 
     protected Toolbar getActionBarToolbar() {

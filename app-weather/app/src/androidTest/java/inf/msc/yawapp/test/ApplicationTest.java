@@ -1,4 +1,4 @@
-package inf.msc.yawapp;
+package inf.msc.yawapp.test;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

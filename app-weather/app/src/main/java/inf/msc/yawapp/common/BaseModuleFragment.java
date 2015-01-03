@@ -14,14 +14,18 @@ public abstract class BaseModuleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        moduleGraph = ((MainApplication) getActivity().getApplication()).createSubGraph(getModules().toArray());
-        moduleGraph.inject(this);
+        setModuleGraph(((MainApplication) getActivity().getApplication()).createSubGraph(getModules().toArray()));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         moduleGraph = null;
+    }
+
+    public void setModuleGraph(ObjectGraph moduleGraph) {
+        this.moduleGraph = moduleGraph;
+        this.moduleGraph.inject(this);
     }
 
     protected abstract List<Object> getModules();
