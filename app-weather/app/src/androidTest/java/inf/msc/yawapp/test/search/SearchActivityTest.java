@@ -3,6 +3,10 @@ package inf.msc.yawapp.test.search;
 import android.support.v7.widget.SearchView;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
+import android.widget.ListView;
+
+import java.util.Arrays;
+import java.util.List;
 
 import dagger.ObjectGraph;
 import inf.msc.yawapp.R;
@@ -66,6 +70,7 @@ public class SearchActivityTest extends ActivityInstrumentationTestCase2<SearchA
 
         // simulate close
         final SearchView searchView = (SearchView) searchActivity.findViewById(R.id.action_search);
+        assertNotNull(searchView);
         searchActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -74,5 +79,75 @@ public class SearchActivityTest extends ActivityInstrumentationTestCase2<SearchA
         });
         getInstrumentation().waitForIdleSync();
         assertEquals(1, mockSearchPresenter.closeCount);
+    }
+
+    /**
+     * Tests if given a suggestion list is displayed correctly in the list view of the search
+     * activity. Also tests, whether clearing of the list works as expected.
+     *
+     * @throws Exception
+     */
+    public void testShowSuggestions() throws Exception {
+        ListView listView = (ListView) searchActivity.findViewById(R.id.suggestions_container);
+        assertNotNull(listView);
+
+        // Fill
+        assertEquals(0, listView.getCount());
+        final List<String> suggestions = Arrays.asList("Foo", "Bar");
+        searchActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                searchActivity.showSuggestions(suggestions);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        assertEquals(2, listView.getCount());
+        assertEquals("Foo", listView.getItemAtPosition(0));
+        assertEquals("Bar", listView.getItemAtPosition(1));
+
+        // Clear
+        searchActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                searchActivity.clearSuggestions();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        assertEquals(0, listView.getCount());
+    }
+
+    /**
+     * This test shows some suggestions and simulates a click on one of those items.
+     * This should result in a submitted search on the presenter object.
+     *
+     * @throws Exception
+     */
+    public void testClickSuggestion() throws Exception {
+        final ListView listView = (ListView) searchActivity.findViewById(R.id.suggestions_container);
+        assertNotNull(listView);
+
+        // Fill in some suggestions
+        assertEquals(0, listView.getCount());
+        final List<String> suggestions = Arrays.asList("Foo", "Bar");
+        searchActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                searchActivity.showSuggestions(suggestions);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        assertEquals(2, listView.getCount());
+
+        // Click on one of the suggestion items
+        searchActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                listView.performItemClick(listView.getChildAt(0), 0, listView.getItemIdAtPosition(0));
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+
+        assertEquals(1, mockSearchPresenter.submittedSearches.size());
+        assertEquals("Foo", mockSearchPresenter.submittedSearches.get(0));
     }
 }
