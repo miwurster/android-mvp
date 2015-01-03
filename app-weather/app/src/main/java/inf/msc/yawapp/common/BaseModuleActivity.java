@@ -28,13 +28,28 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
     @Inject
     NavigationPresenter navigationPresenter;
 
+    public interface GraphCreationStrategy {
+        public ObjectGraph getModuleGraph(BaseModuleActivity activity);
+    }
+
+    private class DefaultGraphCreationStrategy implements GraphCreationStrategy {
+
+        @Override
+        public ObjectGraph getModuleGraph(BaseModuleActivity activity) {
+            return ((MainApplication) getApplication()).createSubGraph(getModules().toArray());
+        }
+    }
+
     private ObjectGraph moduleGraph;
     private Toolbar actionBarToolbar;
+    private GraphCreationStrategy graphCreationStrategy = new DefaultGraphCreationStrategy();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setModuleGraph(((MainApplication) getApplication()).createSubGraph(getModules().toArray()));
+        if (graphCreationStrategy != null) {
+            setModuleGraph(graphCreationStrategy.getModuleGraph(this));
+        }
     }
 
     @Override
@@ -52,6 +67,10 @@ public abstract class BaseModuleActivity extends ActionBarActivity {
     public void setModuleGraph(ObjectGraph moduleGraph) {
         this.moduleGraph = moduleGraph;
         this.moduleGraph.inject(this);
+    }
+
+    public void setGraphCreationStrategy(GraphCreationStrategy graphCreationStrategy) {
+        this.graphCreationStrategy = graphCreationStrategy;
     }
 
     protected Toolbar getActionBarToolbar() {
