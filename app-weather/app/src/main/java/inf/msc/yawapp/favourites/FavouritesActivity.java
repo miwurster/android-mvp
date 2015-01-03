@@ -44,12 +44,7 @@ public class FavouritesActivity extends BaseModuleActivity implements Favourites
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Location item = (Location) parent.getItemAtPosition(position);
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        presenter.submitSearch(item);
-                    }
-                });
+                presenter.submitSearch(item);
             }
         });
 
