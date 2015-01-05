@@ -1,4 +1,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{todonotes}
+\usepackage{csquotes}
+\usepackage{etoolbox}
+
 \newcommand{\todonote}[2][]{\todo[size=\tiny, #1]{#2}}
-\newcommand{\quotes}[1]{``#1''} 
+\newcommand{\quotes}[1]{``#1''}
+
+\AtBeginEnvironment{quote}{\itshape}
