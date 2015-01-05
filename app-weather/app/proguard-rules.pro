@@ -15,4 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontobfuscate
 -dontwarn dagger.**
+
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class inf.msc.yawapp.**
