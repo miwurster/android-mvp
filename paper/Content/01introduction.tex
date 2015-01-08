@@ -1,40 +1,51 @@
 \section{Introduction}
 
 \IEEEPARstart{T}{he \emph{Android}} operating system is one of the most 
-commonly used in mobile industry. According to Gartner, there will be 1.1 
-billion \emph{Android}-based devices sold in 2014 \cite{GartnerAndroid2014}.
-But it's the installed software, the so called \quotes{Applications} or 
-\quotes{Apps}, that bring the actual value to an \emph{Android} device.
+commonly used in mobile industry. After its first presentation in 2007, the open source system started its successful journey and became the leading mobile operating system in 2010 \cite{PassiveMVC}. According to Gartner \cite{GartnerAndroid2014}, there will be 1.1 billion \emph{Android}-based devices sold in 2014.
+
+What brings the actual value to an \emph{Android} device is the installed software, the so called \quotes{Applications} or 
+\quotes{Apps}.
 Software for \emph{Android} devices can be downloaded and installed via the 
 \emph{Play Store}, a software distribution solution, developed by Google and 
 pre-installed on every new device, which currently holds over 1.4 million 
-applications (as of November 2014) \cite{AppBrainStats}.
+applications (as of November 2014) \cite{AppBrainStats}.\\
+
+%\subsection{Application Development}
 
 For developing such an application for the \emph{Android} mobile operating 
 system, Google provides a software development kit (SDK) for the programming 
 language \emph{Java}. It provides access to all functionality of the 
-operating system and the underlaying phone- or tablet hardware.
-However, the SDK does not define a concrete software architecture, which has to 
-be used for developing the application. Instead, developers are totally free in 
+operating system and the underlaying phone- or tablet hardware. The principle components of the \emph{Android} SDK are explained later in this document.\\
+
+%\subsection{Challenges in Android Development}
+
+The SDK does not define a specific software architecture which has to 
+be used for developing the application \cite{AndroidDeveloperCollection}. Instead, developers are totally free in 
 designing their own architecture for fitting their needs for an application.
 Having the number of 1.4 million applications in mind, this fact implies that 
 there are various different software architectures currently implemented, each 
-of them with their pros and cons.
+of them with their pros and cons. 
 
-\todo[inline]{
-Vielleicht k\"onnen wir ja ein sch\"ones Paper damit erstellen und uns so schon einen Pluspunkt bei der Abgabe abholen. Ich bin mir sicher, dass der Prof. Zimmermann auf sch\"ones Aussehen steht.
-}
+However, not having clear rules regarding the application's architecture entails risks, especially for people that are not expert-level developers. Applications become larger from time to time, and without a reasonable architecture this leads to complex code which is hard to understand and maintain \cite{PassiveMVC, BallOfMud}. Additionally, complex dependencies in the SDK cause messy code and make it hard to exchange specific elements without affecting other elements \cite{PassiveMVC}.\\ \todo[inline]{Testability einfügen -- Wie lässt sich das Problem zusammenfassen?}
 
-	\subsection{Android}
-	
-	\subsection{MVC \& MVP}
-	
-	\subsection{Problems in Android Development}
-	
-	\subsection{Motivation: MVP for Android}
-	
-	\subsection{Research Questions}
-	
+%\subsection{Model-View-Presenter Architecture}
 
-	
-	
+A modern architecture approach is Model-View-Presenter (MVP), a model introduced in 1996 to support event-driven systems \cite{TaligentMVP}. Its main goal is to separate the data logic from the presentation logic, thus creating software which is more flexible in terms of replacing the data model without changing the presentation part or vice versa \cite{PassiveMVC}. Therefor, the software is split into three parts: The \emph{Model} provides the data and means to manipulate it, the \emph{View} part is responsible to display the data, and the \emph{Presenter} contains the business logic that handles user-initiated events and issues the appropriate manipulation of the data \cite{TaligentMVP}.\\
+
+%\subsection{Applying MVP in Android}
+
+Applying MVP to \emph{Android} applications seems promising to build less complex applications with clear code and improved extensibility. However, as the considerations in this paper show, an \emph{Android} implementation of MVP is tricky. Some components of the SDK have several responsibilities and make it hard to define whether they are a \emph{Model}, a \emph{View} or a \emph{Presenter} \cite{PassiveMVC}. 
+
+The approach developed in this paper aims to clarify the distinction of these architectural parts. The findings of our research may serve as a guideline on how to apply MVP in \emph{Android} application development.\\
+
+%\subsection{Research Questions}
+In the following sections, these questions concerning the application of MVP to \emph{Android} application development are evaluated and answered:
+
+\begin{enumerate}[label={RQ\arabic*:}, leftmargin=0.95cm]
+\item What are the inherent characteristics given / recommended by the Android Framework? What is the current state in Android Development in accordance to the inherent framework characteristics?
+\item What are the key benefits of the Model-View-Presenter approach?
+\item How can the MVP model be applied to the Android App architecture considering framework building blocks?
+\end{enumerate}
+
+To answer these questions, a prototypical App is built using the MVP approach.
+\todo[inline]{Outlook for each chapter?}
