@@ -104,7 +104,9 @@ A Fragment represents a behavior or a portion of user interface in an Activity. 
 
 \subsection{MVP's two flavors: Passive View \& Supervising Controller}
 
+The \emph{Model-View-Presenter} (MVP) pattern was introduced in 1996 by Potel \cite{TaligentMVP} while developing a programming model for multi-tier client/server applications. Potel explains in his paper how to generalize the classical \emph{Model-View-Controller} (MVC) approach in order to build more complex applications. His idea was to decompose the MVC approach into two fundamental concepts: Data Management (Model) and User Interface (View-Controller).
 
+Like in MVC, Potel's \emph{Model-View-Presenter} pattern consists of three components: \emph{Model}, \emph{View} and \emph{Presenter}. The \emph{Model} represents the domain model including the business logic. The \emph{View} represents the user interface and interacts with the user and shows the data from the model in a certain way. The \emph{Presenter} is the mediator between the business logic (Model) and the user interface (View). Its responsibility is to prepare the data (presentation logic) in order to show it in the user interface and vice versa, to determine how user interactions are going to change the model.
 
 \begin{figure}[!t]
 \centering
@@ -112,5 +114,13 @@ A Fragment represents a behavior or a portion of user interface in an Activity. 
 \caption{Supervising Controller and Passive View}
 \label{fig:mvp}
 \end{figure}
+
+Today, when we talk about MVP, we are talking about two different types: \emph{Supervising Controller} \cite{FowlerSupervisingController} and \emph{Passive View} \cite{FowlerPassiveView}. Fowler retired the classic MVP approach in 2006 \cite{FowlerMvpRetirementNote} and introduced those two implementations -- see Figure \ref{fig:mvp}.
+
+The \textbf{Supervising Controller} approach splits the User Interface in two components: a \emph{Presenter} and \emph{View} – like the classical MVP approach. The \emph{Model} can communicate changes to the \emph{View} using an Observer pattern (indirectly shown as dotted lines in Figure \ref{fig:mvp}). The \emph{View} can make direct changes to the model. In most cases this is done by simple mappings and \emph{Data Binding} capabilities provided by UI frameworks. Any user input is handled by the \emph{Presenter}. It determines how those interactions affect the underlying \emph{Model}. In addition, it handles complex view logic operations i.e. to prepare the model data for the view layer or vice versa, to transform the user input to fit the model requirements.
+
+In contrast to the Supervising Controller, the \textbf{Passive View} totally separates the \emph{View} from the \emph{Model}. There is no direct or indirect interaction between them -- see Figure \ref{fig:mvp}. Interactions between \emph{View} and \emph{Model} is done exclusively via the \emph{Presenter}. This approach reduces the \emph{View} to an absolute minimum by using the \emph{Presenter} to handle all user input events, to update the \emph{Model} based on user interactions as well as to channel \emph{Model} changes back to the \emph{View}. As a result, the \emph{View} is made completely passive and is no longer responsible for updating itself from the \emph{Model}.\\
+The primary driver for \emph{Passive View} is testing. This concept allows testing to be focused on the \emph{Presenter} without needing any interaction with the chosen UI framework.
+
 
 \subsection{Approach to solving the problem}
