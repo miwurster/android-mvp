@@ -16,7 +16,7 @@ The implementation of MVP in the app prototype, follows the approach of Leiva \c
 
 Each activity object has an presenter object associated, implementing the \texttt{Presenter} interface. On the other hand, the presenter object has a reference to the activity object. View related actions, like a click on a button, cause handler functions inside the \texttt{Activity} class being called. Those handler functions do nothing more than executing corresponding actions on the presenter object.
 
-The interaction with the model is done only by the presenter. This makes the app prototype an implementation of the \emph{Passive View} kind of MVP (see \cite[p. 8]{PassiveMVC}).
+The interaction with the model is done only by the presenter. This makes the app prototype an implementation of the \emph{Passive View} kind of MVP.
 An example of an interaction sequence between objects of \texttt{Activity}, \texttt{Presenter} and \texttt{Model} classes is shown in Fig. \ref{fig:androidmvpseq}. Clicking on a button -- let's assume it's labeled \emph{Refresh} -- causes the handler function in the \texttt{Activity} being called. An action is executed on the presenter object by the activity. The presenter retrieves new data from the model and afterwards calls the activity (the \texttt{View}) for showing that data.
 
 \begin{figure}[h]
@@ -34,4 +34,4 @@ The MVP pattern can be applied to \emph{Fragments} the same way as it is describ
 
 This answers RQ3, showing that MVP can be applied to an Android application considering the \emph{Activity} and \emph{Fragment} building blocks.
 
-As an additional remark, the usage of the \emph{Dependency Injection} (see \cite{Fowler04}) library \emph{Dagger} should be mentioned. The library was used to resolve object dependencies, like the one which exists between an \texttt{Activity} and an \texttt{Presenter} object (and vice versa). It automatically injects references of both objects into each other.
+As an additional remark, the usage of the \emph{Dependency Injection} (see \cite{FowlerIoC}) library \emph{Dagger} should be mentioned. The library was used to resolve object dependencies, like the one which exists between an \texttt{Activity} and an \texttt{Presenter} object (and vice versa). It automatically injects references of both objects into each other.
