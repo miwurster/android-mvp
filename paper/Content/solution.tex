@@ -5,7 +5,7 @@ The prototype Android app, developed for this paper, is a simple weather app. It
 
 \subsection{App Structure}
 
-As mentioned above, the basic building blocks of an Android application are \emph{Activities} and \emph{Fragments}. Applying MVP to an Android application therefore means to put attention on those components.
+As mentioned above, the basic building blocks of an Android application are \emph{Activities}, \emph{Fragments} and \emph{Intents}. Applying MVP to an Android application therefore means to put attention on those components.
 
 The implementation of MVP in the app prototype, follows the approach of Leiva \cite{AntLeiv14}, in which \emph{Activities} implement the view part. This means that in addition to extending the base Android \texttt{Activity} class, an activity class must also implement a \texttt{View} interface. The class structure around such an activity is illustrated in Fig. \ref{fig:androidmvp}.
 
@@ -32,9 +32,9 @@ For model operations that take a while to execute -- like retrieving weather dat
 
 The MVP pattern can be applied to \emph{Fragments} the same way as it is described above for \emph{Activities}. Presenters of \emph{Fragment} objects most likely share their model with other \emph{Fragments} and other \emph{Activities}. An example of this was implemented in the \texttt{WeatherDetailsActivity} of the app prototype, which shows the weather data for a selected location. The part of the view showing temperature and wind information was extracted into a separate \emph{Fragment} with its own presenter implementation. Clicking on the \emph{Refresh} button causes the presenter of the activity to instruct the model to fetch updated weather data from \emph{openweathermap.org}. When this data is available, the model notifies all registered observers -- in this case the presenter of the activity and the presenter of the fragment. Both presenters go back to the corresponding view objects and cause the updated data to be displayed.
 
-\todo[inline]{Maybe add something about Intents here}
+As \emph{Intents} are received by the activity object, they can be handled like any other view-related action (e.g. a click on a button). Whenever an intent was received by the activity, a corresponding action on the presenter object is executed -- nothing else. When it comes to creating intents, e.g. for switching to another activity, things get a bit more complicated. One would typically do such action inside the presenter, but intents require to be sent from a specific context, which can either be an activity or the application itself. This means that for creating an intent, the presenter must either address the main application object directly or go back to the activity and let the activity send the intent.
 
-This answers RQ3, showing that MVP can be applied to an Android application considering the \emph{Activity} and \emph{Fragment} building blocks.
+This answers RQ3, showing that MVP can be applied to an Android application considering the \emph{Activity}, \emph{Fragment} and \emph{Intent} building blocks.
 
 As an additional remark, the usage of the \emph{Dependency Injection} (see \cite{FowlerIoC}) library \emph{Dagger} should be mentioned. The library was used to resolve object dependencies, like the one which exists between an \texttt{Activity} and an \texttt{Presenter} object (and vice versa). It automatically injects references of both objects into each other.
 
