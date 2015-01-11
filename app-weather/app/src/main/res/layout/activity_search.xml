@@ -1,3 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ This source code is part of the research paper
+  ~ "Applying Model-View-Presenter Architecture to the Android Framework with App Prototype"
+  ~
+  ~ Software Architecture and Management,
+  ~ Herman-Hollerith-Zentrum, Reutlingen University
+  ~
+  ~ Authors:  Dennis G. Geisse,
+  ~           Iven John,
+  ~           Daniel Joos,
+  ~           Sebastian Kotstein,
+  ~           Michael Wurster
+  ~
+  ~ Year:     2015
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
