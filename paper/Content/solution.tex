@@ -16,7 +16,7 @@ The implementation of MVP in the app prototype, follows the approach of Leiva \c
 \label{fig:androidmvp}
 \end{figure}
 
-Each activity object has an presenter object associated, implementing the \texttt{Presenter} interface. On the other hand, the presenter object has a reference to the activity object. View related actions, like a click on a button, cause handler functions inside the \texttt{Activity} class being called. Those handler functions do nothing more than executing corresponding actions on the presenter object.
+Each activity object has a presenter object associated, implementing the \texttt{Presenter} interface. On the other hand, the presenter object has a reference to the activity object. View related actions, like a click on a button, cause handler functions inside the \texttt{Activity} class being called. Those handler functions do nothing more than executing corresponding actions on the presenter object.
 
 The interaction with the model is done only by the presenter. This makes the app prototype an implementation of the \emph{Passive View} kind of MVP.
 An example of an interaction sequence between objects of \texttt{Activity}, \texttt{Presenter} and \texttt{Model} classes is shown in Fig. \ref{fig:androidmvpseq}. Clicking on a button -- let's assume it's labeled \emph{Refresh} -- causes the handler function in the \texttt{Activity} being called. An action is executed on the presenter object by the activity. The presenter retrieves new data from the model and afterwards calls the activity (the \texttt{View}) for showing that data.
