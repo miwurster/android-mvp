@@ -87,7 +87,7 @@
 \IEEEPARstart{B}{efore} the application prototype is built, composing components of \emph{Android} applications are introduced in this chapter. In addition, it is shown why the MVP approach may improve app development and what MVP actually is.
 % MVP applied to Android Apps
 
-\subsection{Concepts & Components of \emph{Android} Applications}
+\subsection{Concepts \& Components of Android Applications}
 
 Building \emph{Android} applications requires several core components of the \emph{Android} SDK to be used. This section gives a short overview and explanation of important components used in the implementation of the prototype created for this paper.
 
@@ -105,7 +105,11 @@ A Fragment represents a behavior or a portion of user interface in an Activity. 
 \subsection{Common Android Development Approach}
 As a result of strong interrelations between its building components, the \emph{Android} system manages most of its components by itself. Given the complexity and interaction between these as well as the general structure, the framework steers developers toward handling tasks in common ways. In order to help developers understand the structure of the framework, code examples and component explanations are provided in \cite{SDKComponents}.
 
-Since the building components are managed by the system and dependent on each others implementation, one aspect that is inheritly difficult is testability. It is a challenge to divide business logic from the framework as it needs to react to certain system events -- as activity creation or destruction -- in order to be compatible to \emph{Android}. Another area 
+Since the building components are managed by the system and dependent on the implementations, one aspect that is inherently difficult is \emph{testability}. It is a challenge to divide business logic from the framework as it needs to react to certain system events -- like activity destruction, which may be forced by the system at any point in time and need to be appropriately handled by the developer.
+
+Other common difficulties developers face lie with the \emph{maintainability} and \emph{extensibility} of their software. Given the \emph{Android} framework, its many components and classes that enable communication between these compontents, the structure often gets cluttered -- especially in larger application projects. For example, \emph{ListView}s\footnote{Component to \enquote{display a list of scrollable items}. \cite{SDKListView}} need \emph{Adapter}\footnote{Class to \enquote{bridge between AdapterView and the underlying data}. \cite{SDKAdapter}} to display their content, which in turn might use \emph{Loader}s\footnote{Component that \enquote{performs asynchronous loading of data}. \cite{SDKLoader}} and \emph{Cursor}s\footnote{Interface class providing access to results of database queries. \cite{SDKCursor}} to fetch the data to display.
+
+In addition \emph{portability} is a problem as business logic that is strongly intertwined when developing for the \emph{Android} platform cannot easily be ported to other platforms.
 
 
 \subsection{MVP: Passive View or Supervising Controller?}
