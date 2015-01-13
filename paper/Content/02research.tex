@@ -87,12 +87,12 @@
 \IEEEPARstart{B}{efore} the application prototype is built, composing components of \emph{Android} applications are introduced in this chapter. In addition, it is shown why the MVP approach may improve app development and what MVP actually is.
 % MVP applied to Android Apps
 
-\subsection{Components of an \emph{Android} Application}
+\subsection{Concepts & Components of \emph{Android} Applications}
 
-Building an \emph{Android} application requires several core components of the \emph{Android} SDK to be used. This section gives a short overview and short explanation of the components, used for the prototype, created for this paper.
+Building \emph{Android} applications requires several core components of the \emph{Android} SDK to be used. This section gives a short overview and explanation of important components used in the implementation of the prototype created for this paper.
 
 \textbf{Activity}: An application typically consists of one or more activities. An activity fills the whole screen of the device and can be compared to a \emph{window} in a classic desktop application. The official \emph{Android} SDK documentation \cite{SDKActivities} defines an activity as \enquote{an application component that provides a screen with which users can interact in order to do something}.
-There is a defined lifcycle, which all activity objects go through -- the creation, start, stop and the destruction of an activity object. This lifecycle is managed by \emph{Android} itself, meaning an application developer must not manually create or destroy activity objects.
+There is a defined lifcycle, which all activity objects share and follow -- the creation, start, resume, pause, stop and the destruction of an activity object. This lifecycle is managed by \emph{Android} itself, meaning application developers must not manually create or destroy activity objects.
 
 \textbf{Fragment}: Fragments split more complex parts of an activity's user interface into several smaller sub-components. Fragments are also used to encapsulate reusable parts of the user interface, which for example need to appear in multiple activities. The official documentation of the \emph{Android} SDK defines a fragment as follows \cite{SDKFragments}:
 
@@ -102,8 +102,11 @@ A Fragment represents a behavior or a portion of user interface in an Activity. 
 
 \textbf{Intent}: Intents are objects used for communication with the \emph{Android} system. An example would be the start of an activity: an intent must be created including some information to identify, which activity should be started. The intent will be handed over to the \emph{Android} system, which will create and start a corresponding activity. In the official SDK documentation, an intent is defined as \enquote{a messaging object you can use to request an action from another app component} \cite{SDKIntents}.
 
-\subsection{Problems in Android Development (detailed)}
-\todo[inline]{Change heading and add text here}
+\subsection{Common Android Development Approach}
+As a result of strong interrelations between its building components, the \emph{Android} system manages most of its components by itself. Given the complexity and interaction between these as well as the general structure, the framework steers developers toward handling tasks in common ways. In order to help developers understand the structure of the framework, code examples and component explanations are provided in \cite{SDKComponents}.
+
+Since the building components are managed by the system and dependent on each others implementation, one aspect that is inheritly difficult is testability. It is a challenge to divide business logic from the framework as it needs to react to certain system events -- as activity creation or destruction -- in order to be compatible to \emph{Android}. Another area 
+
 
 \subsection{MVP: Passive View or Supervising Controller?}
 
