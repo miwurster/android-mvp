@@ -5,9 +5,9 @@
 
 \subsection{App Structure}
 
-As mentioned above, the basic building blocks of an Android application are \emph{Activities}, \emph{Fragments} and \emph{Intents}. Applying MVP to an Android application therefore means to put attention on those components.
+As mentioned above, the basic building blocks of an Android application are \emph{Activities}, \emph{Fragments} and \emph{Intents}. Applying MVP to an Android application therefore means to put attention on those components.\\
 
-The implementation of MVP in the app prototype, follows the approach of Leiva \cite{AntLeiv14}, in which \emph{Activities} implement the view part. This means that in addition to extending the base Android \texttt{Activity} class, an activity class must also implement a \texttt{View} interface. The class structure around such an activity is illustrated in Fig. \ref{fig:androidmvp}.
+
 
 \begin{figure}[h]
 \centering
@@ -15,6 +15,9 @@ The implementation of MVP in the app prototype, follows the approach of Leiva \c
 \caption{Class structure of an activity (highlighted with yellow background) in the context of an MVP architecture}
 \label{fig:androidmvp}
 \end{figure}
+
+The implementation of MVP in the app prototype, follows the approach of Leiva \cite{AntLeiv14}, in which \emph{Activities} implement the view part. This means that in addition to extending the base Android \texttt{Activity} class, an activity class must also implement a \texttt{View} interface. The class structure around such an activity is illustrated in Fig. \ref{fig:androidmvp}.
+
 
 Each activity object has a presenter object associated, implementing the \texttt{Presenter} interface. On the other hand, the presenter object has a reference to the activity object. View related actions, like a click on a button, cause handler functions inside the \texttt{Activity} class being called. Those handler functions do nothing more than executing corresponding actions on the presenter object.
 
